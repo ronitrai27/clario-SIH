@@ -30,7 +30,7 @@ export function StepIndicator({
   return (
     <div aria-label="Onboarding progress" className="w-full">
       <div className="relative mb-6">
-        <div className="h-1 w-full rounded-full bg-muted" />
+        <div className="h-2 w-full rounded-full bg-muted" />
         <div
           className="absolute left-0 top-0 h-1 rounded-full bg-blue-600 transition-all duration-300 ease-out"
           style={{ width: `${progressPct}%` }}
@@ -64,7 +64,7 @@ export function StepIndicator({
               </button>
               <div
                 className={cn(
-                  "text-xs font-medium text-center text-pretty",
+                  " font-medium text-center text-pretty font-inter text-sm",
                   isActive ? "text-blue-700" : "text-muted-foreground",
                 )}
               >

@@ -7,7 +7,7 @@ import { LuLoader } from "react-icons/lu";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { SpinningText } from "@/components/magicui/spinning-text";
 
 import { Briefcase, Users } from "lucide-react";
 import { LuFlagTriangleRight, LuGraduationCap } from "react-icons/lu";
@@ -124,7 +124,7 @@ export default function CallbackPage() {
   // }
 
   return (
-    <div className="w-full h-screen relative bg-white">
+    <div className="w-full h-screen relative bg-white overflow-hidden">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -143,6 +143,9 @@ export default function CallbackPage() {
           />
           <h1 className="font-raleway text-3xl font-bold text-white">Clario</h1>
         </div>
+      </div>
+      <div className="absolute top-14 right-16">
+        <SpinningText className="text-white tracking-wide">learn more • earn more • grow more •</SpinningText>
       </div>
       <main className="relative z-50 h-full w-full flex items-center justify-center">
         <OnboardingCard />
