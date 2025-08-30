@@ -92,7 +92,7 @@ export default function AuthPage() {
           <div className="w-full h-full flex flex-col items-center justify-center">
             <div className="flex items-center mb-10">
               <Image
-                src="/clario.png"
+                src="/clarioBlack.png"
                 alt="logo"
                 width={80}
                 height={80}
@@ -216,7 +216,7 @@ export default function AuthPage() {
           </div>
         </div>
         {/* RIGHT SIDE */}
-        <div className="h-screen w-[50%] bg-black relative">
+        <div className="h-screen w-[58%] bg-blue-700 relative">
           {/* <Silk
             speed={5}
             scale={1}
@@ -224,29 +224,20 @@ export default function AuthPage() {
             noiseIntensity={1.5}
             rotation={0}
           /> */}
-          {/* <div
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `
-          radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 100%),
-          radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 100%),
-          radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 100%)
-        `,
-            }}
-          /> */}
-
           <div
             className="absolute inset-0 z-0"
             style={{
-              backgroundImage: `
-        radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 70%),
-        radial-gradient(ellipse at 60% 20%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 40% 80%, rgba(34, 197, 94, 0.2) 0%, transparent 65%)
-      `,
+              background: `
+      radial-gradient(ellipse 80% 60% at 5% 40%, rgba(190, 40, 100, 0.65), transparent 70%),   
+      radial-gradient(ellipse 70% 60% at 45% 45%, rgba(255, 80, 160, 0.55), transparent 70%), 
+      radial-gradient(ellipse 62% 52% at 83% 76%, rgba(255, 200, 60, 0.55), transparent 65%), 
+      radial-gradient(ellipse 60% 48% at 75% 20%, rgba(60, 140, 255, 0.55), transparent 70%), 
+      linear-gradient(45deg, #f5d0fe 0%, #fecdd3 100%)                                        
+    `,
             }}
           />
-          <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2">
+
+          <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
             <AnimatedGradientTextDemo />
           </div>
           <div className="absolute inset-0 ">
@@ -255,14 +246,14 @@ export default function AuthPage() {
               alt="Clario"
               width={80}
               height={80}
-              className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+              className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
-            <h1 className="text-[42px] font-bold text-white font-sora tracking-wide text-center leading-snug">
+          <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
+            <h1 className="text-[40px] font-bold text-white font-inter tracking-wide text-center leading-snug">
               “Clarity Today, <br />{" "}
-              <span className="bg-gradient-to-r from-blue-200 via-indigo-300 to-sky-100 bg-clip-text text-transparent ">
+              <span className="text-[44px] font-inter bg-gradient-to-b from-white via-pink-50 to-pink-300 bg-clip-text text-transparent">
                 Success Tomorrow.
               </span>
               ”

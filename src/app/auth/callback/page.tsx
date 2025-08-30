@@ -56,22 +56,11 @@ export default function CallbackPage() {
   const supabase = createClient();
   const router = useRouter();
   const { user, loading, ensureUserInDB, isNewUser } = useUserData();
-  const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
     ensureUserInDB();
   }, []);
 
-  // when onboarding starts to setuo local storage
-  useEffect(() => {
-    if (currentStep === 1) {
-      localStorage.setItem("isOnboardingDone", "false");
-    }
-
-    if (currentStep === 5) {
-      localStorage.setItem("isOnboardingDone", "true");
-    }
-  }, [currentStep]);
 
   useEffect(() => {
     if (!loading && user) {

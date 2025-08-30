@@ -1,6 +1,8 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { v4 as uuidv4 } from "uuid";
+
 interface DBUser {
   id: number;
   userName: string;
@@ -9,6 +11,12 @@ interface DBUser {
   created_at: string;
   totalCredits: number;
   remainingCredits: number;
+  invite_link: string;
+  current_status: string;
+  userPhone: string;
+  institutionName: string;
+  mainFocus: string;
+  calendarConnected: boolean;
 }
 
 interface UserDataContextType {
@@ -55,6 +63,16 @@ export function UserDataProvider({ children }: { children: React.ReactNode }) {
 
       console.log("✅ Authenticated user:", authUser.email);
 
+      // checking id user signed with email
+      const provider = authUser.app_metadata?.provider;
+      if (provider === "email") {
+        localStorage.setItem("emailProvider", "true");
+        console.log("✅ User signed in with email");
+      } else {
+        localStorage.setItem("emailProvider", "false");
+        console.log("⚠️ User signed in with provider:", provider);
+      }
+
       // check if user already exists
       const { data: existingUsers, error: fetchError } = await supabase
         .from("users")
@@ -70,14 +88,12 @@ export function UserDataProvider({ children }: { children: React.ReactNode }) {
       if (!existingUsers || existingUsers.length === 0) {
         console.log("🟡 No user in DB, inserting new one...");
 
-        // fallback values (for email/pass signup, since no metadata)
         const name =
           authUser.user_metadata?.full_name ||
           authUser.user_metadata?.name ||
           "clarioUser";
         const avatar =
-          authUser.user_metadata?.avatar_url ||
-          authUser.user_metadata?.picture ;
+          authUser.user_metadata?.avatar_url || authUser.user_metadata?.picture;
 
         const { data: inserted, error: insertError } = await supabase
           .from("users")
@@ -86,15 +102,17 @@ export function UserDataProvider({ children }: { children: React.ReactNode }) {
               userName: name,
               userEmail: authUser.email,
               avatar,
+              invite_link: uuidv4(),
             },
           ])
           .select()
           .single();
 
         if (insertError) {
-          console.error("❌ Error inserting user:", insertError.message);
+          console.log("❌ Error inserting user:", insertError.message);
         } else {
-          console.log("✅ New user inserted:", inserted);
+          console.log("✅ New user inserted into tables:");
+          localStorage.setItem("isOnboardingDone", "false"); // set onboarding to false
           setUser(inserted);
           setIsNewUser(true);
         }

@@ -12,8 +12,8 @@ export function AnimatedGradientText({
   children,
   className,
   speed = 1,
-  colorFrom = "#ffaa40",
-  colorTo = "#9c40ff",
+  colorFrom = "#fffff",
+  colorTo = "#ffff",
   ...props
 }: AnimatedGradientTextProps) {
   return (
@@ -26,7 +26,7 @@ export function AnimatedGradientText({
         } as React.CSSProperties
       }
       className={cn(
-        `inline animate-gradient bg-gradient-to-r from-sky-50 via-sky-200 to-blue-300 bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+        `inline animate-gradient bg-gradient-to-r from-yellow-300 via-white to-amber-400 bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
         className,
       )}
       {...props}

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -13,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -21,12 +21,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+// import { Textarea } from "@/components/ui/textarea";
 import { StepIndicator } from "./stepIndicator";
 import { Calendar, Copy, Loader2, Share2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
-import { LuActivity, LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import {
+  LuActivity,
+  LuChevronLeft,
+  LuChevronRight,
+  LuLoader,
+} from "react-icons/lu";
 import Image from "next/image";
+import { useUserData } from "@/context/UserDataProvider";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 type Profession =
   | "10th Student"
@@ -86,7 +94,7 @@ const FOCUS_BY_PROFESSION: Record<Profession, string[]> = {
 
 type FormData = {
   // Step 1
-  name: string;
+  name?: string;
   dob: string;
   phone: string;
   institution: string;
@@ -94,18 +102,27 @@ type FormData = {
   profession?: Profession;
   // Step 3
   focus?: string;
-  goalNotes?: string;
   // Step 4
   calendarConnected: boolean;
-  // calendarAccount?: string;
-  // Step 5
-  invites: string[];
 };
 
 export function OnboardingCard() {
   const [step, setStep] = useState<number>(1);
   const [busy, setBusy] = useState<boolean>(false);
   const [emailInput, setEmailInput] = useState<string>("");
+  const { user } = useUserData();
+
+  const supabase = createClient();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const [isEmailProvider, setIsEmailProvider] = useState(false);
+
+  useEffect(() => {
+    // read from localStorage once on mount
+    const stored = localStorage.getItem("emailProvider");
+    setIsEmailProvider(stored === "true");
+  }, []);
 
   const [data, setData] = useState<FormData>({
     name: "",
@@ -114,10 +131,7 @@ export function OnboardingCard() {
     institution: "",
     profession: undefined,
     focus: undefined,
-    goalNotes: "",
     calendarConnected: false,
-    // calendarAccount: undefined,
-    invites: [],
   });
 
   const focusOptions = useMemo(() => {
@@ -130,10 +144,9 @@ export function OnboardingCard() {
     switch (step) {
       case 1:
         return (
-          data.name.trim().length >= 2 &&
           /^\d{4}-\d{2}-\d{2}$/.test(data.dob) &&
           /^[0-9()+\-\s]{7,}$/.test(data.phone.trim()) &&
-          data.institution.trim().length >= 2
+          data.institution.trim().length >= 5
         );
       case 2:
         return !!data.profession;
@@ -156,7 +169,6 @@ export function OnboardingCard() {
   }
 
   async function handleConnectCalendar() {
-    // Mock connect flow; replace with real OAuth later
     toast.info("Calendar connection required ");
   }
 
@@ -178,23 +190,19 @@ export function OnboardingCard() {
       });
       return;
     }
-    setData((d) => {
-      if (d.invites.includes(v)) return d;
-      return { ...d, invites: [...d.invites, v] };
-    });
+
     setEmailInput("");
   }
 
-  function removeInvite(email: string) {
-    setData((d) => ({ ...d, invites: d.invites.filter((e) => e !== email) }));
-  }
-
+  // copy the link
   async function copyReferral() {
-    const link = `${window.location.origin}/invite?ref=${encodeURIComponent(
-      data.name || "user"
-    )}`;
+    if (!user) return;
+
+    const link = `${window.location.origin}/invite/${user.invite_link}`;
+
     await navigator.clipboard.writeText(link);
-    toast("Referral link copied ", {
+
+    toast("Referral link copied", {
       description: (
         <span className="text-gray-600 font-inter">
           Now you can share it with your friends
@@ -203,10 +211,12 @@ export function OnboardingCard() {
     });
   }
 
+  // SHARE the link
   async function shareReferral() {
-    const link = `${window.location.origin}/invite?ref=${encodeURIComponent(
-      data.name || "user"
-    )}`;
+    if (!user) return;
+
+    const link = `${window.location.origin}/invite/${user.invite_link}`;
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -222,8 +232,45 @@ export function OnboardingCard() {
     }
   }
 
-  function finish() {
-    console.log(data);
+  async function finish() {
+    if (!user) return; // safeguard
+
+    setLoading(true);
+    try {
+      const updatePayload: any = {
+        userPhone: data.phone,
+        institutionName: data.institution,
+        mainFocus: data.focus,
+        calendarConnected: data.calendarConnected,
+        current_status: data.profession,
+      };
+
+      // only update userName if it's filled
+      if (data.name && data.name.trim() !== "") {
+        updatePayload.userName = data.name.trim();
+      }
+
+      // update Supabase record
+      const { error } = await supabase
+        .from("users")
+        .update(updatePayload)
+        .eq("id", user.id);
+
+      if (error) {
+        console.error("❌ Error updating user:", error.message);
+        return;
+      }
+
+      // localStorage.removeItem("isOnboardingDone");
+      localStorage.setItem("isOnboardingDone", "true");
+      localStorage.removeItem("emailProvider");
+
+      router.push("/home");
+    } catch (err) {
+      console.error("❌ Unexpected error:", err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -243,21 +290,25 @@ export function OnboardingCard() {
         {step === 1 && (
           <section className="space-y-6" aria-label="Basic information">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="name"
-                  className="text-base font-raleway font-semibold"
-                >
-                  Full name
-                </Label>
-                <Input
-                  id="name"
-                  placeholder="e.g., John Doe"
-                  value={data.name}
-                  onChange={(e) => setData({ ...data, name: e.target.value })}
-                  className="font-raleway"
-                />
-              </div>
+              {/* Show this block ONLY if provider is email */}
+              {isEmailProvider && (
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="name"
+                    className="text-base font-raleway font-semibold"
+                  >
+                    Full name
+                  </Label>
+                  <Input
+                    id="name"
+                    placeholder="e.g., John Doe"
+                    value={data.name}
+                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                    className="font-raleway bg-blue-50"
+                  />
+                </div>
+              )}
+
               <div className="space-y-2">
                 <Label
                   htmlFor="dob"
@@ -270,9 +321,10 @@ export function OnboardingCard() {
                   type="date"
                   value={data.dob}
                   onChange={(e) => setData({ ...data, dob: e.target.value })}
-                  className="font-raleway"
+                  className="font-raleway bg-blue-50 border-blue-200"
                 />
               </div>
+
               <div className="space-y-2">
                 <Label
                   htmlFor="phone"
@@ -286,9 +338,10 @@ export function OnboardingCard() {
                   placeholder="+91 90005 xxxxx"
                   value={data.phone}
                   onChange={(e) => setData({ ...data, phone: e.target.value })}
-                  className="font-raleway"
+                  className="font-inter  bg-blue-50 border-blue-200"
                 />
               </div>
+
               <div className="space-y-2">
                 <Label
                   htmlFor="institution"
@@ -303,6 +356,7 @@ export function OnboardingCard() {
                   onChange={(e) =>
                     setData({ ...data, institution: e.target.value })
                   }
+                  className=" bg-blue-50 border-blue-200 font-inter"
                 />
               </div>
             </div>
@@ -435,6 +489,7 @@ export function OnboardingCard() {
                   placeholder="friend@example.com"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
+                  className="bg-blue-50 border-blue-200 font-inter"
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
@@ -522,9 +577,18 @@ export function OnboardingCard() {
           ) : (
             <Button
               onClick={finish}
+              disabled={loading}
               className="bg-blue-600 hover:bg-blue-700 cursor-pointer"
             >
-              Complete SetUp <LuActivity className="ml-2" />
+              {loading ? (
+                <>
+                  <LuLoader className="mr-2 animate-spin" /> Saving..
+                </>
+              ) : (
+                <>
+                  Complete SetUp <LuActivity className="ml-2" />
+                </>
+              )}
             </Button>
           )}
         </div>

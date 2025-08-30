@@ -58,21 +58,21 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative h-full w-56 cursor-pointer overflow-hidden rounded-xl border px-3 py-2",
+        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-3",
         // light styles
-        "bg-gradient-to-br from-gray-100 via-white to-indigo-200 border border-white",
+        "bg-gradient-to-br from-gray-100 via-white to-pink-200 border border-white",
       )}
     >
       <div className="flex flex-row items-center gap-2 ">
         <img className="rounded-full" width="30" height="30" alt="" src={img} />
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium font-inter">
+          <figcaption className="text-base font-medium font-inter">
             {name}
           </figcaption>
           <p className="text-xs font-medium font-inter">{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-xs font-raleway">{body}</blockquote>
+      <blockquote className="mt-2 text-sm tracking-tight leading-tight font-raleway">{body}</blockquote>
     </figure>
   );
 };

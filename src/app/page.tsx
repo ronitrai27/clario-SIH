@@ -51,13 +51,15 @@ export default function HomePage() {
       <div
         className="absolute inset-0 z-0"
         style={{
-          background:
-            "radial-gradient(125% 125% at 50% 10%, #fff 40%, #3b82f6 100%)",
+          backgroundImage: `
+        radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #ec4899 100%)
+      `,
+          backgroundSize: "100% 100%",
         }}
       />
       <main className="z-50 relative flex flex-col items-center justify-center w-full h-full">
         <div className="flex items-center">
-          <Image src="/clario.png" alt="logo" width={80} height={80} />
+          <Image src="/clarioBlack.png" alt="logo" width={80} height={80} />
           <h1 className="font-raleway text-3xl font-bold ml-2">Clario</h1>
         </div>
 
