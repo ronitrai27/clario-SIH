@@ -104,14 +104,6 @@ export default function CallbackPage() {
     );
   }
 
-  // if (!loading &&!user) {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen text-lg">
-  //        <p className="mt-8 font-raleway text-2xl">Errror occured while validating user <br />Please try again</p>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="w-full h-screen relative bg-white overflow-hidden">
       <div

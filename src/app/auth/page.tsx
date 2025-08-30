@@ -217,14 +217,14 @@ export default function AuthPage() {
         </div>
         {/* RIGHT SIDE */}
         <div className="h-screen w-[58%] bg-blue-700 relative">
-          {/* <Silk
+          <Silk
             speed={5}
             scale={1}
             color="#005eff"
             noiseIntensity={1.5}
             rotation={0}
-          /> */}
-          <div
+          />
+          {/* <div
             className="absolute inset-0 z-0"
             style={{
               background: `
@@ -235,7 +235,7 @@ export default function AuthPage() {
       linear-gradient(45deg, #f5d0fe 0%, #fecdd3 100%)                                        
     `,
             }}
-          />
+          /> */}
 
           <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
             <AnimatedGradientTextDemo />
@@ -244,16 +244,16 @@ export default function AuthPage() {
             <Image
               src="/clarioWhite.png"
               alt="Clario"
-              width={80}
-              height={80}
-              className="absolute top-[36%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+              width={100}
+              height={100}
+              className="absolute top-[32%] left-1/2 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
 
           <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
-            <h1 className="text-[40px] font-bold text-white font-inter tracking-wide text-center leading-snug">
+            <h1 className="text-[58px] font-bold text-white/70 font-sora tracking-wide text-center leading-tight">
               “Clarity Today, <br />{" "}
-              <span className="text-[44px] font-inter bg-gradient-to-b from-white via-pink-50 to-pink-300 bg-clip-text text-transparent">
+              <span className="">
                 Success Tomorrow.
               </span>
               ”

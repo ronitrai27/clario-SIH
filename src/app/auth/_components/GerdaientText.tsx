@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 
 export function AnimatedGradientTextDemo() {
   return (
-    <div className="group relative mx-auto flex items-center justify-center bg-black/20 rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
+    <div className="group relative mx-auto flex items-center justify-center bg-gray-100/20 rounded-full px-4 py-1.5 shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f] ">
       <span
         className={cn(
           "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-yellow-500/70 to-white bg-[length:300%_100%] p-[1px]",

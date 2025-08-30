@@ -405,14 +405,14 @@ export function OnboardingCard() {
                       type="button"
                       onClick={() => setData({ ...data, focus: opt })}
                       className={cn(
-                        "text-left rounded-md border p-3 transition-colors",
+                        "text-left rounded-md border p-3 transition-colors cursor-pointer",
                         selected
                           ? "border-blue-600 bg-blue-50"
-                          : "border-border hover:bg-muted"
+                          : "border-border hover:bg-blue-50"
                       )}
                       aria-pressed={selected}
                     >
-                      <div className="font-medium text-sm font-inter cursor-pointer">
+                      <div className="font-medium text-sm font-inter">
                         {opt}
                       </div>
                     </button>

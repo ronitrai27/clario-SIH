@@ -52,7 +52,7 @@ export default function HomePage() {
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `
-        radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #ec4899 100%)
+        radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #6366f1 100%)
       `,
           backgroundSize: "100% 100%",
         }}
