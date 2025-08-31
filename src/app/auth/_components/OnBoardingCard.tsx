@@ -233,14 +233,16 @@ export function OnboardingCard() {
   }
 
   async function finish() {
-    if (!user) return; // safeguard
+    if (!user) return;
 
     setLoading(true);
     try {
       const updatePayload: any = {
         userPhone: data.phone,
-        institutionName: data.institution,
-        mainFocus: data.focus,
+        institutionName: data.institution
+          ? data.institution.trim().toLowerCase()
+          : null,
+        mainFocus: data.focus ? data.focus.trim().toLowerCase() : null,
         calendarConnected: data.calendarConnected,
         current_status: data.profession,
       };

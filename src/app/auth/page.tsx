@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import Link from "next/link";
 
 export default function AuthPage() {
   const captchaRef = useRef<HCaptcha>(null);
@@ -33,6 +34,9 @@ export default function AuthPage() {
       provider,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: {
+          role: "user",
+        },
       },
     });
 
@@ -53,7 +57,8 @@ export default function AuthPage() {
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/`,
-            captchaToken: token || undefined,
+            // captchaToken: token || undefined,
+             data: { role: "user" },
           },
         });
 
@@ -69,7 +74,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            captchaToken: token || undefined,
+            // captchaToken: token || undefined,
           },
         });
 
@@ -90,14 +95,17 @@ export default function AuthPage() {
         {/* LEFT SIDE */}
         <div className="flex-1">
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <div className="flex items-center mb-10">
-              <Image
-                src="/clarioBlack.png"
-                alt="logo"
-                width={80}
-                height={80}
-                className=""
-              />
+            <div className="flex items-center mb-10 cursor-pointer">
+              <Link href="/web">
+                <Image
+                  src="/clarioBlack.png"
+                  alt="logo"
+                  width={80}
+                  height={80}
+                  className=""
+                />
+              </Link>
+
               <h1 className="font-raleway text-3xl font-bold">Clario</h1>
             </div>
             <div className="flex flex-col gap-3">

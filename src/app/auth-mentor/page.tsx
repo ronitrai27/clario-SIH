@@ -9,11 +9,11 @@ import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
 import { LuChevronRight, LuInfo, LuLoader } from "react-icons/lu";
 
-
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import Link from "next/link";
 
 export default function AuthPage() {
   const captchaRef = useRef<HCaptcha>(null);
@@ -28,11 +28,15 @@ export default function AuthPage() {
   const [isSignup, setIsSignup] = useState<boolean>(false);
   const supabase = createClient();
 
-  const handleLogin = async (provider: "google" | "discord" | "slack_oidc") => {
+  const handleLogin = async (provider: "google" | "discord") => {
+    // console.log(provider);
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
         redirectTo: `${window.location.origin}/auth-mentor/callback`,
+        // queryParams: {
+        //   role: "mentor",
+        // },
       },
     });
 
@@ -52,8 +56,9 @@ export default function AuthPage() {
           email,
           password,
           options: {
+            data: { role: "mentor" },
             emailRedirectTo: `${window.location.origin}/`,
-            captchaToken: token || undefined,
+            // captchaToken: token || undefined,
           },
         });
 
@@ -69,7 +74,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            captchaToken: token || undefined,
+            // captchaToken: token || undefined,
           },
         });
 
@@ -84,6 +89,7 @@ export default function AuthPage() {
       setLoading(false);
     }
   }
+
   return (
     <section>
       <main className="flex lg:flex-row gap-10">
@@ -127,16 +133,20 @@ export default function AuthPage() {
         {/* RIGHT SIDE */}
         <div className="flex-1">
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <div className="flex items-center mb-10">
-              <Image
-                src="/clarioBlack.png"
-                alt="logo"
-                width={80}
-                height={80}
-                className=""
-              />
-              <h1 className="font-raleway text-3xl font-bold">Clario</h1>
-            </div>
+            <Link href="/web">
+              <div className="flex items-center mb-10">
+                <Image
+                  src="/clarioBlack.png"
+                  alt="logo"
+                  width={80}
+                  height={80}
+                  className=""
+                />
+
+                <h1 className="font-raleway text-3xl font-bold">Clario</h1>
+              </div>
+            </Link>
+
             <p className="text-center -mt-5 mb-10 font-raleway text-xl font-semibold">
               Mentor Portal
             </p>
