@@ -2,14 +2,14 @@
 "use client";
 
 import Image from "next/image";
-import { MarqueeDemo } from "./_components/MarqueeLogin";
+// import { MarqueeDemo } from "./_components/MarqueeLogin";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
 import { LuChevronRight, LuInfo, LuLoader } from "react-icons/lu";
-import { AnimatedGradientTextDemo } from "./_components/GerdaientText";
-import Silk from "@/components/Silk/Silk";
+
+
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ export default function AuthPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${window.location.origin}/auth-mentor/callback`,
       },
     });
 
@@ -75,7 +75,7 @@ export default function AuthPage() {
 
         if (error) throw error;
         if (data.session) {
-          router.push("/auth/callback");
+          router.push("/auth-mentor/callback");
         }
       }
     } catch (err: any) {
@@ -88,6 +88,43 @@ export default function AuthPage() {
     <section>
       <main className="flex lg:flex-row gap-10">
         {/* LEFT SIDE */}
+        <div className="h-screen w-[50%] bg-slate-900 relative">
+          {/* Cosmic Aurora */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `
+        radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 70%),
+        radial-gradient(ellipse at 60% 20%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(34, 197, 94, 0.2) 0%, transparent 65%)
+      `,
+            }}
+          />
+          <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
+            {/* <AnimatedGradientTextDemo /> */}
+          </div>
+          <div className="absolute inset-0 ">
+            <Image
+              src="/clarioWhite.png"
+              alt="Clario"
+              width={100}
+              height={100}
+              className="absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
+          </div>
+
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
+            <h1 className="text-[54px] font-bold text-white/70 font-sora tracking-tight text-center leading-tight">
+              &quot;Empowering minds through <br />{" "}
+              <span className="">your experience</span>&quot;
+            </h1>
+          </div>
+
+          <div className="w-[99%] mx-auto absolute bottom-2"></div>
+        </div>
+
+        {/* RIGHT SIDE */}
         <div className="flex-1">
           <div className="w-full h-full flex flex-col items-center justify-center">
             <div className="flex items-center mb-10">
@@ -100,6 +137,9 @@ export default function AuthPage() {
               />
               <h1 className="font-raleway text-3xl font-bold">Clario</h1>
             </div>
+            <p className="text-center -mt-5 mb-10 font-raleway text-xl font-semibold">
+              Mentor Portal
+            </p>
             <div className="flex flex-col gap-3">
               <Button
                 className="font-inter text-sm tracking-wide bg-blue-50 text-black rounded border shadow-sm hover:bg-blue-100 hover:scale-105 hover:border-blue-400 cursor-pointer w-[280px] py-5"
@@ -127,7 +167,7 @@ export default function AuthPage() {
                 />{" "}
                 continue with Discord
               </Button>
-              <Button
+              {/* <Button
                 className="font-inter text-sm tracking-wide bg-blue-50 text-black rounded border shadow-sm  hover:bg-blue-100 hover:scale-105 hover:border-blue-400 cursor-pointer  w-[280px] py-5"
                 onClick={() => handleLogin("slack_oidc")}
               >
@@ -139,7 +179,7 @@ export default function AuthPage() {
                   className="mr-5"
                 />{" "}
                 continue with Slack
-              </Button>
+              </Button> */}
             </div>
             {/* ---- */}
             <p className="font-inter text-base font-light my-7">
@@ -216,52 +256,6 @@ export default function AuthPage() {
                 <LuInfo className="mr-2 inline" /> {error}
               </p>
             )}
-          </div>
-        </div>
-        {/* RIGHT SIDE */}
-        <div className="h-screen w-[58%] bg-blue-700 relative">
-          <Silk
-            speed={5}
-            scale={1}
-            color="#005eff"
-            noiseIntensity={1.5}
-            rotation={0}
-          />
-          {/* <div
-            className="absolute inset-0 z-0"
-            style={{
-              background: `
-      radial-gradient(ellipse 80% 60% at 5% 40%, rgba(190, 40, 100, 0.65), transparent 70%),   
-      radial-gradient(ellipse 70% 60% at 45% 45%, rgba(255, 80, 160, 0.55), transparent 70%), 
-      radial-gradient(ellipse 62% 52% at 83% 76%, rgba(255, 200, 60, 0.55), transparent 65%), 
-      radial-gradient(ellipse 60% 48% at 75% 20%, rgba(60, 140, 255, 0.55), transparent 70%), 
-      linear-gradient(45deg, #f5d0fe 0%, #fecdd3 100%)                                        
-    `,
-            }}
-          /> */}
-
-          <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <AnimatedGradientTextDemo />
-          </div>
-          <div className="absolute inset-0 ">
-            <Image
-              src="/clarioWhite.png"
-              alt="Clario"
-              width={100}
-              height={100}
-              className="absolute top-[32%] left-1/2 -translate-x-1/2 -translate-y-1/2"
-            />
-          </div>
-
-          <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
-            <h1 className="text-[58px] font-bold text-white/70 font-sora tracking-wide text-center leading-tight">
-              “Clarity Today, <br /> <span className="">Success Tomorrow.</span>
-              ”
-            </h1>
-          </div>
-
-          <div className="w-[99%] mx-auto absolute bottom-2">
-            <MarqueeDemo />
           </div>
         </div>
       </main>

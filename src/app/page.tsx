@@ -38,7 +38,7 @@ export default function HomePage() {
         setTimeout(() => router.replace("/auth/callback"), 3000);
       } else {
         console.log("❌ No session, redirecting to /web");
-        setTimeout(() => router.replace("/auth"), 3000);
+        setTimeout(() => router.replace("/web"), 3000);
       }
     };
 

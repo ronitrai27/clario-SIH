@@ -61,7 +61,6 @@ export default function CallbackPage() {
     ensureUserInDB();
   }, []);
 
-
   useEffect(() => {
     if (!loading && user) {
       const isOnboardingIncomplete =
@@ -104,33 +103,44 @@ export default function CallbackPage() {
     );
   }
 
-  return (
-    <div className="w-full h-screen relative bg-white overflow-hidden">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(125% 125% at 50% 90%, #fff 40%, #6366f1 100%)",
-        }}
-      />
-      <div className="absolute top-2 left-5">
-        <div className="flex items-center ">
-          <Image
-            src="/clarioWhite.png"
-            alt="logo"
-            width={60}
-            height={60}
-            className=""
-          />
-          <h1 className="font-raleway text-3xl font-bold text-white">Clario</h1>
+  const onboardingStatus =
+    typeof window !== "undefined"
+      ? localStorage.getItem("isOnboardingDone")
+      : null;
+
+  if (onboardingStatus === "false" || isNewUser) {
+    return (
+      <div className="w-full h-screen relative bg-white overflow-hidden">
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background:
+              "radial-gradient(125% 125% at 50% 90%, #fff 40%, #6366f1 100%)",
+          }}
+        />
+        <div className="absolute top-2 left-5">
+          <div className="flex items-center ">
+            <Image
+              src="/clarioWhite.png"
+              alt="logo"
+              width={60}
+              height={60}
+              className=""
+            />
+            <h1 className="font-raleway text-3xl font-bold text-white">
+              Clario
+            </h1>
+          </div>
         </div>
+        <div className="absolute top-14 right-16">
+          <SpinningText className="text-white tracking-wide">
+            learn more • earn more • grow more •
+          </SpinningText>
+        </div>
+        <main className="relative z-50 h-full w-full flex items-center justify-center">
+          <OnboardingCard />
+        </main>
       </div>
-      <div className="absolute top-14 right-16">
-        <SpinningText className="text-white tracking-wide">learn more • earn more • grow more •</SpinningText>
-      </div>
-      <main className="relative z-50 h-full w-full flex items-center justify-center">
-        <OnboardingCard />
-      </main>
-    </div>
-  );
+    );
+  }
 }
