@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
+import SlidingCards from "../_components/SlidingCard";
 
 export default function HomePage() {
   const supabase = createClient();
@@ -18,8 +19,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full h-full bg-gray-100">
-     
+    <div className="w-full h-full bg-white py-6 px-4">
+     <SlidingCards/>
     </div>
   );
 }

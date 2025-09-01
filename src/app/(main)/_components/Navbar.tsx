@@ -40,7 +40,7 @@ import { LuWallet } from "react-icons/lu";
 export default function Navbar() {
   const { user, loading } = useUserData();
   return (
-    <div className="bg-white py-4 px-4 flex items-center gap-10 justify-between ">
+    <div className="bg-white py-4 px-4 pr-8 flex items-center gap-10 justify-between ">
       <div>
         <SidebarTrigger />
       </div>
@@ -86,21 +86,21 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              <div className="bg-gradient-to-tr from-blue-300/80 to-blue-400 flex items-center gap-2 pr-2 max-[1280px]:pr-0 rounded-full  cursor-pointer hover:shadow-sm transition min-[1280px]:py-1">
+              <div className="">
                 <Image
                   src={user?.avatar || "/user.png"}
                   alt="User Avatar"
-                  width={44}
-                  height={44}
-                  className="rounded-full"
+                  width={52}
+                  height={52}
+                  className="rounded-full cursor-pointer"
                 />
-                <div className="flex flex-col font-inter tracking-tight max-[1280px]:hidden">
+                {/* <div className="flex flex-col font-inter tracking-tight max-[1280px]:hidden">
                   <p className="font-medium font-raleway text-white capitalize tracking-tight">{user?.userName}</p>
                   <p className="font-light text-white text-sm max-w-[130px] truncate tracking-tight">
                     {user?.userEmail}
                   </p>
                 </div>
-                <LuChevronDown className="text-xl text-white max-[1280px]:hidden" />
+                <LuChevronDown className="text-xl text-white max-[1280px]:hidden" /> */}
               </div>
             )}
           </DropdownMenuTrigger>
@@ -162,8 +162,8 @@ export default function Navbar() {
               <DropdownMenuSeparator />
 
               {/* Logout */}
-              <DropdownMenuItem asChild className="p-0 rounded-none bg-blue-500">
-                <Button className="flex items-center gap-3 w-full bg-blue-500 hover:bg-blue-600  py-2 px-3 cursor-pointer text-white">
+              <DropdownMenuItem asChild className="p-0 rounded-none">
+                <Button className="flex items-center gap-3 w-full bg-blue-600  py-2 px-3 cursor-pointer text-white">
                   <LuLogOut className="h-5 w-5 text-white " />
                   Logout
                 </Button>

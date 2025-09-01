@@ -61,19 +61,26 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar variant="floating">
+    <Sidebar>
       <SidebarHeader className="">
         <div className={`flex items-center justify-center `}>
           <Image
-            src="/clario.png"
+            src="/clarioWhite.png"
             alt="logo"
             width={60}
             height={60}
             className=""
           />
-          <h2 className="font-bold -ml-1 font-sora tracking-tight text-2xl">
+          <h2 className="font-bold -ml-1 font-sora tracking-tight text-2xl text-white">
             Clario
           </h2>
+        </div>
+        <div className="flex items-center text-gray-300 text-sm font-sora gap-3 justify-center">
+          <span>connect</span>
+          .
+          <span>Learn</span>
+          .
+          <span>Grow</span>
         </div>
 
         <Separator className="mt-1 mb-2 " />
