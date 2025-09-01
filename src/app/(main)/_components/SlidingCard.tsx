@@ -21,7 +21,7 @@ const SlidingCards = () => {
       gradient: "from-blue-300 to-indigo-400",
       textAccent: "text-blue-600",
       buttonGradient: "from-blue-300 to-indigo-400",
-      image: "/element1.png",
+      image: "/element4.png",
     },
     {
       id: 2,

@@ -133,7 +133,7 @@ export default function Navbar() {
 
               {/* Items */}
 
-              <DropdownMenuItem className="cursor-pointer flex justify-between pl-3 pr-6 py-2  rounded-none">
+              <DropdownMenuItem className="cursor-pointer flex justify-between pl-3 pr-6 py-2  rounded-none hover:bg-blue-50">
                 <p className="flex items-center gap-3">
                   <LuWallet className="h-6 w-6 text-black" />{" "}
                   <span className="font-inter text-base tracking-tight">
@@ -145,14 +145,14 @@ export default function Navbar() {
                   {user?.remainingCredits} / {user?.totalCredits}
                 </span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer flex gap-3 px-3 py-2">
+              <DropdownMenuItem className="cursor-pointer flex gap-3 px-3 py-2 hover:bg-blue-50">
                 <LuUser className="h-6 w-6 text-black" />
                 <span className="font-inter text-base tracking-tight">
                   Profile
                 </span>
               </DropdownMenuItem>
 
-              <DropdownMenuItem className="cursor-pointer flex gap-3 px-3 py-2">
+              <DropdownMenuItem className="cursor-pointer flex gap-3 px-3 py-2 hover:bg-blue-50">
                 <LuSun className="h-6 w-6 text-black " />
                 <span className="font-inter text-base tracking-tight">
                   Theme
@@ -162,7 +162,7 @@ export default function Navbar() {
               <DropdownMenuSeparator />
 
               {/* Logout */}
-              <DropdownMenuItem asChild className="p-0 rounded-none">
+              <DropdownMenuItem asChild className="p-0 rounded-none ">
                 <Button className="flex items-center gap-3 w-full bg-blue-600  py-2 px-3 cursor-pointer text-white">
                   <LuLogOut className="h-5 w-5 text-white " />
                   Logout

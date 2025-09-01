@@ -58,7 +58,7 @@ export default function AuthPage() {
           options: {
             emailRedirectTo: `${window.location.origin}/email-verified`,
             // captchaToken: token || undefined,
-             data: { role: "user" },
+            data: { role: "user" },
           },
         });
 
@@ -227,14 +227,41 @@ export default function AuthPage() {
           </div>
         </div>
         {/* RIGHT SIDE */}
-        <div className="h-screen w-[58%] bg-blue-700 relative">
-          <Silk
+        <div className="h-screen w-[55%] bg-blue-700 relative">
+          {/* <Silk
             speed={5}
             scale={1}
             color="#005eff"
             noiseIntensity={1.5}
             rotation={0}
+          /> */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: `
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(90, 70, 200, 0.85), transparent 70%),
+        radial-gradient(ellipse 70% 60% at 20% 80%, rgba(40, 120, 220, 0.75), transparent 70%),
+        radial-gradient(ellipse 65% 55% at 60% 65%, rgba(0, 180, 255, 0.55), transparent 70%),
+        radial-gradient(ellipse 65% 40% at 50% 60%, rgba(180, 60, 200, 0.45), transparent 70%),
+        linear-gradient(180deg, #0f172a 0%, #1e293b 100%)
+      `,
+            }}
           />
+          {/* <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: `
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(90, 70, 200, 0.85), transparent 70%),
+      radial-gradient(ellipse 70% 60% at 20% 80%, rgba(40, 120, 220, 0.75), transparent 70%),
+      radial-gradient(ellipse 65% 55% at 60% 65%, rgba(0, 180, 255, 0.55), transparent 70%),
+      radial-gradient(ellipse 65% 40% at 50% 60%, rgba(180, 60, 200, 0.55), transparent 70%),
+      radial-gradient(ellipse 60% 45% at 40% 75%, rgba(140, 90, 220, 0.5), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 65% 35%, rgba(255, 220, 120, 0.35), transparent 70%),
+      linear-gradient(180deg, #0f172a 0%, #1e1b4b 60%, #1e293b 100%)
+    `,
+            }}
+          /> */}
+
           {/* <div
             className="absolute inset-0 z-0"
             style={{

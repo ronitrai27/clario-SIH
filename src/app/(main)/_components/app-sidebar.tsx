@@ -17,6 +17,7 @@ import {
   LuLogOut,
   LuSettings,
   LuSun,
+  LuWallet,
 } from "react-icons/lu";
 import {
   Popover,
@@ -40,6 +41,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Sparkle } from "lucide-react";
 
 export function AppSidebar() {
   const { user, loading } = useUserData();
@@ -55,7 +57,7 @@ export function AppSidebar() {
       router.push("/auth");
     } catch (error) {
       console.error("Error signing out:", error);
-    }finally{
+    } finally {
       setSignoutLoading(false);
     }
   }
@@ -76,11 +78,7 @@ export function AppSidebar() {
           </h2>
         </div>
         <div className="flex items-center text-gray-300 text-sm font-sora gap-3 justify-center">
-          <span>connect</span>
-          .
-          <span>Learn</span>
-          .
-          <span>Grow</span>
+          <span>connect</span>.<span>Learn</span>.<span>Grow</span>
         </div>
 
         <Separator className="mt-1 mb-2 " />
@@ -90,6 +88,34 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter className="px-1 overflow-hidden">
+        <div className="mb-4 bg-gradient-to-br from-blue-100 to-indigo-300 w-[96%] mx-auto h-[132px] rounded-lg py-2 px-3">
+          <div className="flex items-center gap-3">
+            <div className="bg-white h-9 w-9 rounded-sm flex items-center justify-center">
+              <LuWallet className="text-2xl text-blue-600" />
+            </div>
+            <h2 className="font-raleway font-semibold text-base">Credits</h2>
+          </div>
+          <div className="flex  justify-between">
+            <div className="flex flex-col items-center justify-start mt-2">
+              <p className="text-center font-sora font-bold text-2xl tracking-tight">
+                {user?.remainingCredits}
+              </p>
+
+              <button
+                className="text-xs tracking-tight font-inter cursor-pointer text-blue-600 bg-gray-100/30 hover:bg-gray-100/60  px-2 rounded-sm flex items-center gap-2 mt-3"
+              >
+                Top Up <Sparkle />
+              </button>
+            </div>
+            <Image
+              src="/card2.png"
+              alt="logo"
+              width={100}
+              height={100}
+              className="object-cover -mt-4 -rotate-12"
+            />
+          </div>
+        </div>
         {loading ? (
           <div></div>
         ) : (
@@ -219,19 +245,17 @@ export function AppSidebar() {
                         className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
                         onClick={signOut}
                       >
-                       {
-                        signoutLoading ? (
+                        {signoutLoading ? (
                           <>
-                          <LuLoader className="animate-spin mr-2 inline" />
-                          <span>Signing Out..</span>
+                            <LuLoader className="animate-spin mr-2 inline" />
+                            <span>Signing Out..</span>
                           </>
-                        ): (
+                        ) : (
                           <>
-                          <LuLogOut className="mr-2 inline" />
-                          <span>Logout</span> 
+                            <LuLogOut className="mr-2 inline" />
+                            <span>Logout</span>
                           </>
-                        )
-                       }
+                        )}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
