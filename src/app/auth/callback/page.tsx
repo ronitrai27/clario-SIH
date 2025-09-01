@@ -69,7 +69,7 @@ export default function CallbackPage() {
 
       if (isNewUser) {
         toast(`Welcome aboard, ${user?.userEmail}!`);
-      } else if (isOnboardingIncomplete) {
+      } else if (isOnboardingIncomplete || user?.is_verified === false) {
         toast("Resuming your onboarding Process");
       } else {
         toast(`Welcome back, ${user?.userName}!`);

@@ -74,7 +74,6 @@ const EXPERTISE_OPTIONS = [
   "Startup support",
   "Board exam excellence",
   "Skill building",
-  "Others",
   "Crack competitive exams",
   "Choose career paths",
   "Counseling & guidance",
@@ -184,6 +183,7 @@ export function MentorOnboarding({
           bio: payload.bio || null,
           current_position: payload.occupation.toLowerCase(),
           expertise: payload.expertise.map((e) => e.toLowerCase()),
+          is_verified:true
         };
 
         // update mentor record
@@ -331,12 +331,12 @@ export function MentorOnboarding({
               value={data.occupation}
               onValueChange={(val) => update("occupation", val)}
             >
-              <SelectTrigger aria-label="Occupation">
-                <SelectValue placeholder="Select an occupation" />
+              <SelectTrigger aria-label="Occupation" className="w-full">
+                <SelectValue placeholder="Select an occupation"  />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent position="item-aligned">
                 {OCCUPATIONS.map((role) => (
-                  <SelectItem key={role} value={role}>
+                  <SelectItem key={role} value={role} className="font-inter cursor-pointer">
                     {role}
                   </SelectItem>
                 ))}

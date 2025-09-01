@@ -57,7 +57,7 @@ export default function AuthPage() {
           password,
           options: {
             data: { role: "mentor" },
-            emailRedirectTo: `${window.location.origin}/`,
+            emailRedirectTo: `${window.location.origin}/email-verified`,
             // captchaToken: token || undefined,
           },
         });

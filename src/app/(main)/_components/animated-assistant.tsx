@@ -10,6 +10,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { useAssistantDialogStore } from "@/lib/store/useAssistantDialog"
+import { Star } from "lucide-react"
+import { BsStars } from "react-icons/bs";
 
 export default function AnimatedAssistant() {
   const [showWave, setShowWave] = useState(false)
@@ -54,9 +56,9 @@ export default function AnimatedAssistant() {
       <div className="flex items-center gap-4 relative">
         <div
           onClick={() => useAssistantDialogStore.getState().open()}
-          className="relative bg-gray-50/80 w-11 h-11 rounded-full flex items-center justify-center shadow-md cursor-pointer"
+          className="relative bg-blue-50/90 w-11 h-11 rounded-full flex items-center justify-center shadow-md cursor-pointer"
         >
-          <LuMic className="text-[20px] text-black z-10" />
+          <BsStars className="text-[20px] text-black z-10" />
           {showWave && (
             <>
               <span className="absolute w-full h-full rounded-full bg-blue-400/20 animate-ping z-0" />
@@ -83,7 +85,6 @@ export default function AnimatedAssistant() {
             <DialogTitle>AI Assistant</DialogTitle>
           </DialogHeader>
           <div className="text-sm text-muted-foreground">
-       
             This is your future assistant panel.
           </div>
         </DialogContent>

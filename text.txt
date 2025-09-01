@@ -1,4 +1,4 @@
-Static links -  const link = `${window.location.origin}/invite/${user.invite_link}` (onboardingCard.tsx)
+Static links -  const link = `${window.location.origin}/invite/${user.invite_link}` (onboardingCard.tsx), in email verified page 
 2 localstorage - onbaording and loginProvider ! , different for mentor
 
 

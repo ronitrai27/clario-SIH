@@ -245,6 +245,7 @@ export function OnboardingCard() {
         mainFocus: data.focus ? data.focus.trim().toLowerCase() : null,
         calendarConnected: data.calendarConnected,
         current_status: data.profession,
+        is_verified: true,
       };
 
       // only update userName if it's filled

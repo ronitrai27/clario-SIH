@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect } from "react";
 
@@ -36,7 +37,7 @@ const MentorCallback = () => {
 
       if (isNewMentor) {
         toast(`Welcome aboard, ${mentor?.email}!`);
-      } else if (isOnboardingIncomplete) {
+      } else if (isOnboardingIncomplete || mentor?.is_verified === false) {
         toast("Resuming your onboarding Process");
       } else {
         toast(`Welcome back, ${mentor?.full_name}!`);

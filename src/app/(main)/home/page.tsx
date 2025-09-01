@@ -18,13 +18,8 @@ export default function HomePage() {
   };
 
   return (
-    <div>
-      <h1>Home</h1>
-      <Button onClick={handleSignOut}>Sign out</Button>
-
-      {loading && "Loading..."}
-      <p>{user?.userEmail}</p>
-      <p>{user?.userName}</p>
+    <div className="w-full h-full bg-gray-100">
+     
     </div>
   );
 }

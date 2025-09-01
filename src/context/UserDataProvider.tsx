@@ -18,6 +18,7 @@ interface DBUser {
   institutionName: string;
   mainFocus: string;
   calendarConnected: boolean;
+  is_verified: boolean;
 }
 // mentors ---
 interface DBMentor {
@@ -33,6 +34,7 @@ interface DBMentor {
   rating: number;
   avatar: string | null;
   created_at: string;
+  is_verified: boolean;
 }
 
 interface UserDataContextType {
