@@ -95,7 +95,7 @@ export function AppSidebar() {
         ) : (
           <Popover>
             <PopoverTrigger asChild>
-              <div className="bg-gradient-to-br from-blue-300 to-blue-500 py-2 px-2 flex items-center justify-between w-full rounded-md overflow-hidden cursor-pointer">
+              <div className="bg-gray-50 py-2 px-2 flex items-center justify-between w-full rounded-md overflow-hidden cursor-pointer">
                 <Image
                   src={user?.avatar || "/user.png"}
                   alt="logo"
@@ -104,14 +104,14 @@ export function AppSidebar() {
                   className="rounded-full"
                 />
                 <div className="flex flex-col">
-                  <p className="text-base font-inter tracking-tight text-white">
+                  <p className="text-base font-inter tracking-tight text-black">
                     {user?.userName}
                   </p>
-                  <p className="text-gray-200 max-w-[130px] truncate text-sm font-inter">
+                  <p className="text-gray-800 max-w-[130px] truncate text-sm font-inter">
                     {user?.userEmail}
                   </p>
                 </div>
-                <LuChevronsDownUp className="text-2xl cursor-pointer text-white" />
+                <LuChevronsDownUp className="text-2xl cursor-pointer text-black" />
               </div>
             </PopoverTrigger>
 
