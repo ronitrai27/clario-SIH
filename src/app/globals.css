@@ -150,4 +150,21 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* For a specific scrollable container */
+.scroll-container {
+  overflow: auto; /* or scroll */
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* For the whole page */
+html, body {
+  height: 100%;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 }

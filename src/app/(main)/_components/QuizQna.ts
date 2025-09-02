@@ -44,7 +44,8 @@ const class12 = {
       ],
       support_type: [
         {
-          question: "How supportive is your family towards your exam preparation?",
+          question:
+            "How supportive is your family towards your exam preparation?",
           options: ["Very supportive", "Neutral", "Unsupportive"],
         },
         {
@@ -59,11 +60,21 @@ const class12 = {
       deep_understanding: [
         {
           question: "What is your biggest challenge in exam preparation?",
-          options: ["Time management", "Consistency", "Subject clarity", "Stress"],
+          options: [
+            "Time management",
+            "Consistency",
+            "Subject clarity",
+            "Stress",
+          ],
         },
         {
           question: "What motivates you the most to crack this exam?",
-          options: ["Passion", "Career opportunities", "Family expectations", "Social impact"],
+          options: [
+            "Passion",
+            "Career opportunities",
+            "Family expectations",
+            "Social impact",
+          ],
         },
       ],
     },
@@ -81,11 +92,23 @@ const class12 = {
         },
         {
           question: "Why did you choose this stream?",
-          options: ["Passion", "High salary", "Social impact", "Family influence"],
+          options: [
+            "Passion",
+            "High salary",
+            "Social impact",
+            "Family influence",
+          ],
         },
         {
-          question: "Along with your stream, what additional skill/interest would you like to build?",
-          options: ["Technical", "Creative", "Sports", "Entrepreneurship", "Others"],
+          question:
+            "Along with your stream, what additional skill/interest would you like to build?",
+          options: [
+            "Technical",
+            "Creative",
+            "Sports",
+            "Entrepreneurship",
+            "Others",
+          ],
         },
       ],
       learning_style: [
@@ -117,12 +140,23 @@ const class12 = {
       ],
       deep_understanding: [
         {
-          question: "What is your biggest confusion about choosing a career path?",
-          options: ["Job options", "Future growth", "Family pressure", "Lack of awareness"],
+          question:
+            "What is your biggest confusion about choosing a career path?",
+          options: [
+            "Job options",
+            "Future growth",
+            "Family pressure",
+            "Lack of awareness",
+          ],
         },
         {
           question: "What matters most to you in a career?",
-          options: ["Job security", "High income", "Work-life balance", "Passion"],
+          options: [
+            "Job security",
+            "High income",
+            "Work-life balance",
+            "Passion",
+          ],
         },
       ],
     },
@@ -136,10 +170,16 @@ const class12 = {
         },
         {
           question: "What areas do you feel you need guidance in?",
-          options: ["Career decisions", "Studies", "Mental health", "Exam preparation"],
+          options: [
+            "Career decisions",
+            "Studies",
+            "Mental health",
+            "Exam preparation",
+          ],
         },
         {
-          question: "How often do you seek advice from teachers, mentors, or peers?",
+          question:
+            "How often do you seek advice from teachers, mentors, or peers?",
           options: ["Rarely", "Sometimes", "Often", "Always"],
         },
         {
@@ -149,7 +189,8 @@ const class12 = {
       ],
       learning_style: [
         {
-          question: "Do you understand concepts better when explained one-on-one or in groups?",
+          question:
+            "Do you understand concepts better when explained one-on-one or in groups?",
           options: ["One-on-one", "Groups"],
         },
         {
@@ -163,7 +204,8 @@ const class12 = {
       ],
       support_type: [
         {
-          question: "How supportive is your family towards your studies/career?",
+          question:
+            "How supportive is your family towards your studies/career?",
           options: ["Very supportive", "Neutral", "Unsupportive"],
         },
         {
@@ -172,12 +214,18 @@ const class12 = {
         },
         {
           question: "What resources do you think would help you the most?",
-          options: ["Workshops", "Mentorship", "Online courses", "Counseling sessions"],
+          options: [
+            "Workshops",
+            "Mentorship",
+            "Online courses",
+            "Counseling sessions",
+          ],
         },
       ],
       deep_understanding: [
         {
-          question: "What’s your biggest challenge right now where you feel counseling could help?",
+          question:
+            "What’s your biggest challenge right now where you feel counseling could help?",
         },
         {
           question: "What outcome do you expect from counseling?",
@@ -191,15 +239,25 @@ const class12 = {
       focus_specific: [
         {
           question: "Which skills are you most interested in building?",
-          options: ["Technical", "Communication", "Creative", "Leadership", "Entrepreneurship"],
+          options: [
+            "Technical",
+            "Communication",
+            "Creative",
+            "Leadership",
+            "Entrepreneurship",
+          ],
         },
         {
           question: "Why do you want to build this skill?",
-          options: ["Career growth", "Personal interest", "Academic requirement"],
+          options: [
+            "Career growth",
+            "Personal interest",
+            "Academic requirement",
+          ],
         },
         {
-          question: "How much time per week can you dedicate to skill-building?",
-          
+          question:
+            "How much time per week can you dedicate to skill-building?",
         },
         {
           question: "Would you prefer online or offline skill training?",
@@ -212,16 +270,19 @@ const class12 = {
           options: ["Practice", "Theory", "Both"],
         },
         {
-          question: "What type of projects/tasks excite you the most while learning?",
+          question:
+            "What type of projects/tasks excite you the most while learning?",
         },
       ],
       support_type: [
         {
-          question: "Does your school/college provide resources for skill development?",
+          question:
+            "Does your school/college provide resources for skill development?",
           options: ["Yes", "No", "Limited"],
         },
         {
-          question: "How supportive is your family towards your studies/career?",
+          question:
+            "How supportive is your family towards your studies/career?",
           options: ["Very supportive", "Neutral", "Unsupportive"],
         },
         {
@@ -231,10 +292,12 @@ const class12 = {
       ],
       deep_understanding: [
         {
-          question: "Which skills do you feel are most important for your future career?",
+          question:
+            "Which skills do you feel are most important for your future career?",
         },
         {
-          question: "What’s stopping you right now from improving these skills?",
+          question:
+            "What’s stopping you right now from improving these skills?",
           options: ["Time", "Resources", "Motivation"],
         },
       ],
@@ -244,7 +307,8 @@ const class12 = {
     "startup support": {
       focus_specific: [
         {
-          question: "Have you ever tried or thought about starting a small business/project?",
+          question:
+            "Have you ever tried or thought about starting a small business/project?",
           options: ["Yes", "No"],
         },
         {
@@ -261,17 +325,20 @@ const class12 = {
       ],
       learning_style: [
         {
-          question: "Do you prefer learning startup skills via real experience or structured courses?",
+          question:
+            "Do you prefer learning startup skills via real experience or structured courses?",
           options: ["Real experience", "Structured courses", "Both"],
         },
         {
-          question: "Would you learn better from case studies, mentorship, or trial-and-error?",
+          question:
+            "Would you learn better from case studies, mentorship, or trial-and-error?",
           options: ["Case studies", "Mentorship", "Trial-and-error"],
         },
       ],
       support_type: [
         {
-          question: "How supportive is your family towards your studies/career?",
+          question:
+            "How supportive is your family towards your studies/career?",
           options: ["Very supportive", "Neutral", "Unsupportive"],
         },
         {
@@ -279,13 +346,15 @@ const class12 = {
           options: ["Yes", "No", "Unsure", "Not much"],
         },
         {
-          question: "Would you like to join a student entrepreneurship community?",
+          question:
+            "Would you like to join a student entrepreneurship community?",
           options: ["Yes", "No", "Maybe"],
         },
       ],
       deep_understanding: [
         {
-          question: "What is your biggest fear about starting something of your own?",
+          question:
+            "What is your biggest fear about starting something of your own?",
           options: ["Failure", "Money", "Family pressure", "Lack of knowledge"],
         },
         {
@@ -296,7 +365,6 @@ const class12 = {
     },
   },
 };
-
 
 const class10 = {
   "10th Student": {
@@ -377,66 +445,6 @@ const class10 = {
         },
       ],
     },
-
-    "Startup support": {
-      focus_specific: [
-        {
-          question: "What type of startup idea excites you?",
-          options: ["Tech", "Creative", "Service", "Social impact", "Others"],
-        },
-        {
-          question: "Do you already have a startup idea or are you exploring?",
-          options: ["Already have idea", "Exploring options"],
-        },
-        {
-          question:
-            "How confident are you in your ability to pursue entrepreneurship?",
-          options: ["Very confident", "Somewhat confident", "Not confident"],
-        },
-        {
-          question:
-            "What skills would you like to develop to support your startup journey?",
-          options: ["Business", "Marketing", "Technical", "Networking"],
-        },
-      ],
-      learning_style: [
-        {
-          question:
-            "Do you prefer learning entrepreneurship through mentors, books, or hands-on projects?",
-          options: ["Mentors", "Books", "Hands-on projects", "Others"],
-        },
-        {
-          question: "How do you usually learn business-related concepts best?",
-          options: ["Case studies", "Practical work", "Discussions", "Videos"],
-        },
-      ],
-      support_type: [
-        {
-          question: "Do you have family support for pursuing entrepreneurship?",
-          options: ["Yes", "No", "Somewhat"],
-        },
-        {
-          question:
-            "What financial resources can you access to work on your startup?",
-          options: ["High", "Medium", "Low"],
-        },
-        {
-          question: "Do you have mentors or a support network?",
-          options: ["Yes", "No"],
-        },
-      ],
-      deep_understanding: [
-        {
-          question: "What’s your biggest challenge in starting up?",
-          options: ["Idea", "Funding", "Confidence", "Skills"],
-        },
-        {
-          question: "What excites you most about entrepreneurship?",
-          options: ["Money", "Freedom", "Impact", "Innovation"],
-        },
-      ],
-    },
-
     "Board exam excellence": {
       focus_specific: [
         {
@@ -498,7 +506,6 @@ const class10 = {
         },
       ],
     },
-
     "Skill building": {
       focus_specific: [
         {
@@ -557,6 +564,64 @@ const class10 = {
           question:
             "Which motivates you more: mastering skills for career or for passion?",
           options: ["Career", "Passion", "Both equally"],
+        },
+      ],
+    },
+    "Startup support": {
+      focus_specific: [
+        {
+          question: "What type of startup idea excites you?",
+          options: ["Tech", "Creative", "Service", "Social impact", "Others"],
+        },
+        {
+          question: "Do you already have a startup idea or are you exploring?",
+          options: ["Already have idea", "Exploring options"],
+        },
+        {
+          question:
+            "How confident are you in your ability to pursue entrepreneurship?",
+          options: ["Very confident", "Somewhat confident", "Not confident"],
+        },
+        {
+          question:
+            "What skills would you like to develop to support your startup journey?",
+          options: ["Business", "Marketing", "Technical", "Networking"],
+        },
+      ],
+      learning_style: [
+        {
+          question:
+            "Do you prefer learning entrepreneurship through mentors, books, or hands-on projects?",
+          options: ["Mentors", "Books", "Hands-on projects", "Others"],
+        },
+        {
+          question: "How do you usually learn business-related concepts best?",
+          options: ["Case studies", "Practical work", "Discussions", "Videos"],
+        },
+      ],
+      support_type: [
+        {
+          question: "Do you have family support for pursuing entrepreneurship?",
+          options: ["Yes", "No", "Somewhat"],
+        },
+        {
+          question:
+            "What financial resources can you access to work on your startup?",
+          options: ["High", "Medium", "Low"],
+        },
+        {
+          question: "Do you have mentors or a support network?",
+          options: ["Yes", "No"],
+        },
+      ],
+      deep_understanding: [
+        {
+          question: "What’s your biggest challenge in starting up?",
+          options: ["Idea", "Funding", "Confidence", "Skills"],
+        },
+        {
+          question: "What excites you most about entrepreneurship?",
+          options: ["Money", "Freedom", "Impact", "Innovation"],
         },
       ],
     },
