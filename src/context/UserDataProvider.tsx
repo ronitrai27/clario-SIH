@@ -19,6 +19,7 @@ interface DBUser {
   mainFocus: string;
   calendarConnected: boolean;
   is_verified: boolean;
+  isQuizDone: boolean;
 }
 // mentors ---
 interface DBMentor {
