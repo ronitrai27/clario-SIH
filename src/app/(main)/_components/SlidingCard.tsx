@@ -45,6 +45,17 @@ const SlidingCards = () => {
       buttonGradient: "from-amber-400 to-yellow-200",
       image: "/element3.png",
     },
+    {
+      id: 4,
+      title: "Turn Passion Into Profession",
+      description:
+        "Transform what you love into a successful career. Get guidance, resources, and opportunities to align your passion with your profession.",
+      accent: "border-rose-500",
+      gradient: "from-rose-300 to-red-400",
+      textAccent: "text-rose-600",
+      buttonGradient: "from-rose-300 to-red-400",
+      image: "/element5.png", // 🔹 you can replace with any image
+    },
   ];
 
   // Auto-slide functionality

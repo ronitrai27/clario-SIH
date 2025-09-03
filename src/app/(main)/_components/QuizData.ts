@@ -42,21 +42,7 @@ export const quizData = {
             ],
           },
         ],
-        support_type: [
-          {
-            question:
-              "How supportive is your family towards your exam preparation?",
-            options: ["Very supportive", "Neutral", "Unsupportive"],
-          },
-          {
-            question: "Do you have access to coaching or mentoring?",
-            options: ["Yes", "No", "Unsure", "Not much"],
-          },
-          {
-            question: "How much guidance do you feel you need?",
-            options: ["Minimal", "Moderate", "Extensive"],
-          },
-        ],
+
         deep_understanding: [
           {
             question: "What is your biggest challenge in exam preparation?",
@@ -123,19 +109,6 @@ export const quizData = {
             ],
           },
         ],
-        support_type: [
-          {
-            question: "How supportive is your family in your career decisions?",
-            options: ["Very supportive", "Neutral", "Unsupportive"],
-          },
-          {
-            question: "What is your budget for higher studies/resources?",
-          },
-          {
-            question: "How much guidance do you feel you need?",
-            options: ["Minimal", "Moderate", "Extensive"],
-          },
-        ],
         deep_understanding: [
           {
             question:
@@ -160,6 +133,10 @@ export const quizData = {
       },
       "skill building": {
         focus_specific: [
+           {
+            question: "Which stream are you in?",
+            options: ["Medical", "Non-medical", "Commerce", "Arts"],
+          },
           {
             question: "Which skills are you most interested in building?",
             options: [
@@ -182,10 +159,6 @@ export const quizData = {
             question:
               "How much time per week can you dedicate to skill-building?",
           },
-          {
-            question: "Would you prefer online or offline skill training?",
-            options: ["Online", "Offline"],
-          },
         ],
         learning_style: [
           {
@@ -197,22 +170,6 @@ export const quizData = {
               "What type of projects/tasks excite you the most while learning?",
           },
         ],
-        support_type: [
-          {
-            question:
-              "Does your school/college provide resources for skill development?",
-            options: ["Yes", "No", "Limited"],
-          },
-          {
-            question:
-              "How supportive is your family towards your studies/career?",
-            options: ["Very supportive", "Neutral", "Unsupportive"],
-          },
-          {
-            question: "Do you have access to coaching or mentoring?",
-            options: ["Yes", "No", "Unsure", "Not much"],
-          },
-        ],
         deep_understanding: [
           {
             question:
@@ -222,70 +179,6 @@ export const quizData = {
             question:
               "What’s stopping you right now from improving these skills?",
             options: ["Time", "Resources", "Motivation"],
-          },
-        ],
-      },
-      "startup support": {
-        focus_specific: [
-          {
-            question:
-              "Have you ever tried or thought about starting a small business/project?",
-            options: ["Yes", "No"],
-          },
-          {
-            question: "What area would you like to start in?",
-            options: ["Tech", "Retail", "Services", "Creative", "Others"],
-          },
-          {
-            question: "What motivates you to consider a startup?",
-            options: ["Independence", "Passion", "Money", "Problem-solving"],
-          },
-          {
-            question: "Do you have any role models in entrepreneurship?",
-          },
-        ],
-        learning_style: [
-          {
-            question:
-              "Do you prefer learning startup skills via real experience or structured courses?",
-            options: ["Real experience", "Structured courses", "Both"],
-          },
-          {
-            question:
-              "Would you learn better from case studies, mentorship, or trial-and-error?",
-            options: ["Case studies", "Mentorship", "Trial-and-error"],
-          },
-        ],
-        support_type: [
-          {
-            question:
-              "How supportive is your family towards your studies/career?",
-            options: ["Very supportive", "Neutral", "Unsupportive"],
-          },
-          {
-            question: "Do you have access to coaching or mentoring?",
-            options: ["Yes", "No", "Unsure", "Not much"],
-          },
-          {
-            question:
-              "Would you like to join a student entrepreneurship community?",
-            options: ["Yes", "No", "Maybe"],
-          },
-        ],
-        deep_understanding: [
-          {
-            question:
-              "What is your biggest fear about starting something of your own?",
-            options: [
-              "Failure",
-              "Money",
-              "Family pressure",
-              "Lack of knowledge",
-            ],
-          },
-          {
-            question: "What excites you the most about entrepreneurship?",
-            options: ["Freedom", "Innovation", "Income", "Impact"],
           },
         ],
       },
@@ -338,25 +231,7 @@ export const quizData = {
             ],
           },
         ],
-        support_type: [
-          {
-            question:
-              "How supportive is your family in your studies/career choice?",
-            options: [
-              "Very supportive",
-              "Somewhat supportive",
-              "Not supportive",
-            ],
-          },
-          {
-             question: "Do you have access to coaching or mentoring?",
-            options: ["Yes", "No", "Unsure", "Not much"],
-          },
-          {
-            question: "What is your budget level for coaching/resources?",
-            options: ["High", "Medium", "Low"],
-          },
-        ],
+
         deep_understanding: [
           {
             question: "What is your biggest confusion about choosing a career?",
@@ -467,23 +342,7 @@ export const quizData = {
             options: ["Individual projects", "Group learning"],
           },
         ],
-        support_type: [
-          {
-            question:
-              "Does your family encourage you in skill-building outside academics?",
-            options: ["Yes", "No", "Sometimes"],
-          },
-          {
-            question:
-              "Do you have budget/resources for online courses or training?",
-            options: ["High", "Medium", "Low"],
-          },
-          {
-            question:
-              "Do you have mentors or seniors guiding you in skill learning?",
-            options: ["Yes", "No"],
-          },
-        ],
+
         deep_understanding: [
           {
             question: "What’s your biggest challenge in building new skills?",
@@ -496,78 +355,9 @@ export const quizData = {
           },
         ],
       },
-      "startup support": {
-        focus_specific: [
-          {
-            question: "What type of startup idea excites you?",
-            options: ["Tech", "Creative", "Service", "Social impact", "Others"],
-          },
-          {
-            question:
-              "Do you already have a startup idea or are you exploring?",
-            options: ["Already have idea", "Exploring options"],
-          },
-          {
-            question:
-              "How confident are you in your ability to pursue entrepreneurship?",
-            options: ["Very confident", "Somewhat confident", "Not confident"],
-          },
-          {
-            question:
-              "What skills would you like to develop to support your startup journey?",
-            options: ["Business", "Marketing", "Technical", "Networking"],
-          },
-        ],
-        learning_style: [
-          {
-            question:
-              "Do you prefer learning entrepreneurship through mentors, books, or hands-on projects?",
-            options: ["Mentors", "Books", "Hands-on projects", "Others"],
-          },
-          {
-            question:
-              "How do you usually learn business-related concepts best?",
-            options: [
-              "Case studies",
-              "Practical work",
-              "Discussions",
-              "Videos",
-            ],
-          },
-        ],
-        support_type: [
-          {
-            question:
-              "Do you have family support for pursuing entrepreneurship?",
-            options: ["Yes", "No", "Somewhat"],
-          },
-          {
-            question:
-              "What financial resources can you access to work on your startup?",
-            options: ["High", "Medium", "Low"],
-          },
-          {
-            question: "Do you have mentors or a support network?",
-            options: ["Yes", "No"],
-          },
-        ],
-        deep_understanding: [
-          {
-            question: "What’s your biggest challenge in starting up?",
-            options: ["Idea", "Funding", "Confidence", "Skills"],
-          },
-          {
-            question: "What excites you most about entrepreneurship?",
-            options: ["Money", "Freedom", "Impact", "Innovation"],
-          },
-        ],
-      },
     },
   },
 };
-
-
-
 
 export type QuizQuestion = {
   question: string;

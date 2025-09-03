@@ -54,33 +54,30 @@ const PROFESSION_OPTIONS: Profession[] = [
 const FOCUS_BY_PROFESSION: Record<Profession, string[]> = {
   "10th Student": [
     "Career/ Path guidance",
-    "startup support",
     "Board exam excellence",
     "Skill building",
+    "Others"
   ],
   "12th Student": [
     "Crack competitive exams",
     "Choose Career paths",
     "Skill building",
-    "startup support",
+    "Others"
   ],
   Diploma: [
     "Job placement",
     "Internship looking",
     "Career/ Path guidance",
     "Skill building",
-    "Startup support",
   ],
   "Graduate (Bachelor)": [
     "Job placement",
     "Internship looking",
-    "Startup support",
     "Career/ Path guidance",
   ],
   "Postgraduate (Master/PhD)": [
     "Research opportunities",
     "Higher studies (abroad/PhD)",
-    "Startup support",
     "Job placement",
   ],
 };

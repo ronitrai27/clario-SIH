@@ -71,7 +71,6 @@ const OCCUPATIONS = [
 
 const EXPERTISE_OPTIONS = [
   "Career/ Path guidance",
-  "Startup support",
   "Board exam excellence",
   "Skill building",
   "Crack competitive exams",

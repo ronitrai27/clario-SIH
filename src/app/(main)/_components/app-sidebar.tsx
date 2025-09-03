@@ -171,10 +171,10 @@ export function AppSidebar() {
 
               <CollapsibleContent>
                 <SidebarMenuSub className="pl-2 mt-3 space-y-2">
-                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
-                    AI Career Board
+                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
+                    AI Career Coach
                   </SidebarMenuSubItem>
-                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
+                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
                     AI Roadmap
                   </SidebarMenuSubItem>
                   {user?.current_status !== "10th Student" &&

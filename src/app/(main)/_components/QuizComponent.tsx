@@ -14,6 +14,7 @@ export default function Quiz() {
   const mainFocus = user?.mainFocus;
   const [step, setStep] = useState(0);
   const [started, setStarted] = useState(false);
+  const [finished, setFinished] = useState(false);
   const [answers, setAnswers] = useState<
     Record<string, Record<number, string>>
   >({});
@@ -78,6 +79,39 @@ export default function Quiz() {
     console.log("Final Quiz Data:", JSON.stringify(result, null, 2));
   };
 
+  if (finished) {
+    return (
+      <div className="w-[600px] mx-auto p-6 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-md text-center space-y-4">
+        <div className="flex justify-center items-center bg-blue-100 w-12 h-12 rounded-full mx-auto">
+          <Activity className="text-2xl text-blue-500" />
+        </div>
+        <h2 className="text-2xl font-bold font-sora text-blue-500">
+           Quiz Completed!
+        </h2>
+        <p className="text-gray-700 font-inter text-lg">
+          Great job {user?.userName}! You’ve reached the end of the quiz.
+        </p>
+
+        <div className="flex justify-center gap-4 mt-6">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setAnswers({});
+              setStep(0);
+              setStarted(false);
+              setFinished(false);
+            }}
+          >
+            Retake Quiz
+          </Button>
+          <Button className="bg-blue-500 text-white" onClick={handleSubmit}>
+            Submit Quiz
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   //  Welcome screen before quiz starts
   if (!started) {
     return (
@@ -85,7 +119,7 @@ export default function Quiz() {
         <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3">
           <Activity className="text-2xl text-blue-500" />
         </div>
-        <h2 className="text-3xl font-bold font-sora">Welcome to Your Quiz</h2>
+        <h2 className="text-2xl font-bold font-sora">Welcome to Your Quiz</h2>
         <p className="text-gray-700 font-inter text-xl text-center">
           Personalized assessment for your academic journey
         </p>
@@ -162,7 +196,7 @@ export default function Quiz() {
           disabled={step === 0}
           onClick={() => setStep((s) => Math.max(s - 1, 0))}
         >
-         <LuArrowLeft className="inline mr-2" /> Back
+          <LuArrowLeft className="inline mr-2" /> Back
         </Button>
 
         {step < allQuestions.length - 1 ? (
@@ -170,23 +204,17 @@ export default function Quiz() {
             onClick={() =>
               setStep((s) => Math.min(s + 1, allQuestions.length - 1))
             }
-            disabled={!answers[currentQ.section]?.[currentQ.index]} 
+            disabled={!answers[currentQ.section]?.[currentQ.index]}
           >
             Next <LuArrowRight className="inline ml-2" />
           </Button>
         ) : (
-          <div className="space-x-2">
-            <Button
-              variant="outline"
-              onClick={() => {
-                setStep(0);
-                setStarted(false);
-              }}
-            >
-              Restart
-            </Button>
-            <Button onClick={handleSubmit}>Submit</Button>
-          </div>
+          <Button
+            className="bg-blue-500 cursor-pointer text-white"
+            onClick={() => setFinished(true)} 
+          >
+            Finish <LuArrowRight className="inline ml-2" />
+          </Button>
         )}
       </div>
     </div>
