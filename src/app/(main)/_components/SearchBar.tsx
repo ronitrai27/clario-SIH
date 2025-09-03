@@ -8,7 +8,7 @@ export default function SearchBar() {
   const [value, setValue] = useState("");
 
   return (
-    <div className="relative flex items-center bg-blue-50 w-full max-w-[400px] px-2 rounded-full shadow-sm">
+    <div className="relative flex items-center bg-white w-full max-w-[400px] px-2 rounded-full shadow-sm">
       {/* Input */}
       <Input
         value={value}

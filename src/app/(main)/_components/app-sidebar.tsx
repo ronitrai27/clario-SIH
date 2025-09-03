@@ -6,17 +6,29 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { useUserData } from "@/context/UserDataProvider";
 import Image from "next/image";
 import {
   LuArrowUpRight,
+  LuBrain,
+  LuChevronDown,
   LuChevronsDownUp,
   LuCreditCard,
+  LuHistory,
+  LuLayoutDashboard,
   LuLoader,
   LuLogOut,
+  LuMessageCircle,
   LuSettings,
+  LuShapes,
   LuSun,
+  LuUsers,
   LuWallet,
 } from "react-icons/lu";
 import {
@@ -38,16 +50,24 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Sparkle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
 
 export function AppSidebar() {
   const { user, loading } = useUserData();
   const supabase = createClient();
   const router = useRouter();
   const [signoutLoading, setSignoutLoading] = useState(false);
+  const pathname = usePathname();
 
   async function signOut() {
     setSignoutLoading(true);
@@ -84,15 +104,97 @@ export function AppSidebar() {
         <Separator className="mt-1 mb-2 " />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup />
-        <SidebarGroup />
+        <SidebarGroup>
+          <SidebarMenu className="p-2 space-y-2.5">
+            {/* HOME */}
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`flex cursor-pointer duration-200 ease-in-out rounded 
+            ${
+              pathname === "/home"
+                ? "bg-blue-400 scale-105 hover:bg-white/10"
+                : "hover:bg-white/10 hover:scale-105"
+            }`}
+              >
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuLayoutDashboard className="text-xl" />
+                  Home
+                </p>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* Mentor Connect */}
+            <SidebarMenuItem className="">
+              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuUsers className="text-xl" />
+                  Mentor Connect
+                </p>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* HIstory */}
+            <SidebarMenuItem className="">
+              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuHistory className="text-xl" />
+                  History
+                </p>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* MESSAGES */}
+            <SidebarMenuItem className="">
+              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuMessageCircle className="text-xl" />
+                  Messages
+                </p>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* COMMUNITY */}
+            <SidebarMenuItem className="">
+              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuShapes className="text-xl" />
+                  Community
+                </p>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* AI TOOLS COLLAPSIBLE */}
+            <Collapsible className="mt-2" defaultOpen={true}>
+              <CollapsibleTrigger asChild className="">
+                <SidebarMenuButton className="w-full flex items-center justify-between hover:bg-white/10 cursor-pointer text-white hover:text-black group">
+                  <p className="flex items-center gap-3 font-medium font-inter text-base ">
+                    <LuBrain className="text-xl" /> AI Tools
+                  </p>
+                  <LuChevronDown className="text-xl group-hover:text-black " />
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+
+              <CollapsibleContent>
+                <SidebarMenuSub className="pl-2 mt-3 space-y-2">
+                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
+                    AI Career Board
+                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
+                    AI Roadmap
+                  </SidebarMenuSubItem>
+                  {user?.current_status !== "10th Student" &&
+                    user?.current_status !== "12th Student" && (
+                      <SidebarMenuSubItem className="font-raleway font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
+                        AI Resume Analyser
+                      </SidebarMenuSubItem>
+                    )}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </Collapsible>
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="px-1 overflow-hidden">
-        <div className="mb-4 bg-gradient-to-br from-blue-100 to-indigo-300 w-[96%] mx-auto h-[132px] rounded-lg py-2 px-3">
+        <div className="mb-4 bg-gradient-to-br from-white via-blue-200 to-blue-400 w-[96%] mx-auto h-[120px] rounded-lg px-2 py-3">
           <div className="flex items-center gap-3">
-            <div className="bg-white h-9 w-9 rounded-sm flex items-center justify-center">
+           
               <LuWallet className="text-2xl text-blue-600" />
-            </div>
+           
             <h2 className="font-raleway font-semibold text-base">Credits</h2>
           </div>
           <div className="flex  justify-between">
@@ -101,18 +203,16 @@ export function AppSidebar() {
                 {user?.remainingCredits}
               </p>
 
-              <button
-                className="text-xs tracking-tight font-inter cursor-pointer text-blue-600 bg-gray-100/30 hover:bg-gray-100/60  px-2 rounded-sm flex items-center gap-2 mt-3"
-              >
-                Top Up <Sparkle />
+              <button className="text-xs tracking-tight font-inter cursor-pointer text-blue-600 bg-gray-100/40 hover:bg-gray-100/70  px-2 rounded-sm flex items-center gap-2 mt-3">
+                Top Up <Sparkle  className="" size={20}/>
               </button>
             </div>
             <Image
               src="/card2.png"
               alt="logo"
-              width={100}
-              height={100}
-              className="object-cover -mt-4 -rotate-12"
+              width={90}
+              height={90}
+              className="object-contain -mt-4 -rotate-12"
             />
           </div>
         </div>

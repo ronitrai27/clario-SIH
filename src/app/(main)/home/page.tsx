@@ -67,7 +67,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="h-full bg-white py-6 px-4">
+    <div className="h-full bg-gray-50 py-6 px-4">
       <SlidingCards />
       {loading ? (
         <div className="mt-3 max-w-[900px] mx-auto flex justify-between items-center">
@@ -104,7 +104,7 @@ export default function HomePage() {
               {mentors.map((m) => (
                 <Card
                   key={m.id}
-                  className="relative group max-w-[350px] max-h-[360px] flex-shrink-0 rounded-2xl shadow-md bg-gray-50 p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
+                  className="relative group max-w-[350px] max-h-[360px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
                 >
                   {/* your existing content */}
                   <CardHeader className="flex flex-col  gap-2 p-0">

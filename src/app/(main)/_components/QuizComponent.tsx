@@ -89,7 +89,7 @@ export default function Quiz() {
         <p className="text-gray-700 font-inter text-xl text-center">
           Personalized assessment for your academic journey
         </p>
-        <div className="my-6 bg-white rounded-lg shadow p-3">
+        <div className="my-6 bg-blue-50 border border-blue-500 rounded-lg shadow p-3">
           <p className="text-black font-inter text-lg">{user?.userName}</p>
           <p className="text-gray-700 mt-3 capitalize font-raleway">
             <span className="font-medium font-inter text-lg ">

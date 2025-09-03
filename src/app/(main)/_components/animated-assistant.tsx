@@ -56,7 +56,7 @@ export default function AnimatedAssistant() {
       <div className="flex items-center gap-4 relative">
         <div
           onClick={() => useAssistantDialogStore.getState().open()}
-          className="relative bg-blue-50/90 w-11 h-11 rounded-full flex items-center justify-center shadow-md cursor-pointer"
+          className="relative bg-white w-11 h-11 rounded-full flex items-center justify-center shadow-md cursor-pointer"
         >
           <BsStars className="text-[20px] text-black z-10" />
           {showWave && (
