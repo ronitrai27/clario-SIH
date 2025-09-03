@@ -29,9 +29,13 @@ const fallbackAvatars = [
 export default function HomePage() {
   const supabase = createClient();
   const router = useRouter();
-  const { user, loading } = useUserData();
+  const { user, loading, ensureUserInDB } = useUserData();
   const [mentors, setMentors] = useState<DBMentor[]>([]);
   const [mentorLoading, setMentorLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    ensureUserInDB();
+  }, []);
 
   const getAvatar = (mentor: any) => {
     if (mentor.avatar) return mentor.avatar;
@@ -40,10 +44,10 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !user.mainFocus ) return;
     if (mentors.length > 0) return;
     setMentorLoading(true);
-    getMatchingMentors(user.mainFocus)
+    getMatchingMentors(user?.mainFocus)
       .then((data) => setMentors(data))
       .finally(() => setMentorLoading(false));
   }, [user]);
@@ -121,7 +125,7 @@ export default function HomePage() {
                         <div className="w-full h-full bg-white/25 rounded-tr-2xl rotate-45 transform origin-top-right"></div>
                       </div>
 
-                       <div className="absolute bottom-20 left-0 w-16 h-16">
+                      <div className="absolute bottom-20 left-0 w-16 h-16">
                         <div className="w-full h-full bg-white/30 rounded-tr-2xl rotate-6 transform origin-top-right"></div>
                       </div>
 

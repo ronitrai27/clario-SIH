@@ -5,6 +5,8 @@ import { quizData, QuizSection } from "./QuizData";
 import { useUserData } from "@/context/UserDataProvider";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { Activity } from "lucide-react";
+import { LuArrowBigRight, LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 export default function Quiz() {
   const { user } = useUserData();
@@ -27,10 +29,9 @@ export default function Quiz() {
     current_status: string,
     mainFocus: string
   ): QuizSection | undefined {
-    const block = quizData[gradeKey]?.[current_status] as Record<
-      string,
-      QuizSection
-    >;
+    const block = (
+      quizData[gradeKey] as Record<string, Record<string, QuizSection>>
+    )[current_status];
     return block?.[mainFocus];
   }
 
@@ -80,34 +81,53 @@ export default function Quiz() {
   //  Welcome screen before quiz starts
   if (!started) {
     return (
-      <div className="max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md text-center space-y-4">
-        <h2 className="text-2xl font-bold">Welcome to Your Quiz</h2>
-        <p className="text-gray-700">
-          <span className="font-semibold">Current Status:</span>{" "}
-          {current_status}
+      <div className="w-[600px] mx-auto p-6 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-md text-center space-y-4">
+        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-3">
+          <Activity className="text-2xl text-blue-500" />
+        </div>
+        <h2 className="text-3xl font-bold font-sora">Welcome to Your Quiz</h2>
+        <p className="text-gray-700 font-inter text-xl text-center">
+          Personalized assessment for your academic journey
         </p>
-        <p className="text-gray-700">
-          <span className="font-semibold">Main Focus:</span> {mainFocus}
-        </p>
-        <Button onClick={() => setStarted(true)} className="mt-4">
-          Start Quiz
+        <div className="my-6 bg-white rounded-lg shadow p-3">
+          <p className="text-black font-inter text-lg">{user?.userName}</p>
+          <p className="text-gray-700 mt-3 capitalize font-raleway">
+            <span className="font-medium font-inter text-lg ">
+              Current Status:
+            </span>{" "}
+            {current_status}
+          </p>
+          <p className="text-gray-700 mt-3 capitalize font-raleway">
+            <span className="font-medium font-inter text-lg ">Main Focus:</span>{" "}
+            {mainFocus}
+          </p>
+        </div>
+        <Button
+          onClick={() => setStarted(true)}
+          className="mt-4 bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-lg font-medium"
+        >
+          Start Quiz <LuArrowBigRight className="inline ml-2" />
         </Button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
-      <h2 className="text-lg font-bold">
-        Question {step + 1} of {allQuestions.length}
-      </h2>
+    <div className="w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-inter font-semibold">
+          Question {step + 1} of {allQuestions.length}
+        </h2>
+        <p className="text-sm text-muted-foreground font-inter">
+          {progressPercent}% completed
+        </p>
+      </div>
 
-      <Progress value={progress} className="h-2" />
-      <p className="text-sm text-gray-500 text-right mt-1">{progressPercent}% completed</p>
+      <Progress value={progress} className="h-2 bg-blue-100" />
 
-      <p className="mt-4">{currentQ.question.question}</p>
+      <p className="mt-4 font-sora text-xl">{currentQ.question.question}</p>
 
-      <p className="text-sm text-gray-500 italic">
+      <p className="text-base font-inter  text-gray-500 italic">
         Section: {currentQ.section.replace("_", " ")}
       </p>
 
@@ -117,10 +137,10 @@ export default function Quiz() {
             <button
               key={i}
               onClick={() => saveAnswer(opt)}
-              className={`px-4 py-2 rounded-lg ${
+              className={`px-4 py-2 rounded ${
                 answers[currentQ.section]?.[currentQ.index] === opt
-                  ? "bg-blue-600 text-white"
-                  : "bg-blue-100 hover:bg-blue-200"
+                  ? "bg-blue-500 border border-white text-white"
+                  : "bg-gray-50 border border-gray-300 hover:bg-blue-100 hover:border-blue-500"
               }`}
             >
               {opt}
@@ -142,7 +162,7 @@ export default function Quiz() {
           disabled={step === 0}
           onClick={() => setStep((s) => Math.max(s - 1, 0))}
         >
-          Back
+         <LuArrowLeft className="inline mr-2" /> Back
         </Button>
 
         {step < allQuestions.length - 1 ? (
@@ -150,9 +170,9 @@ export default function Quiz() {
             onClick={() =>
               setStep((s) => Math.min(s + 1, allQuestions.length - 1))
             }
-            disabled={!answers[currentQ.section]?.[currentQ.index]} // block next until answered
+            disabled={!answers[currentQ.section]?.[currentQ.index]} 
           >
-            Next
+            Next <LuArrowRight className="inline ml-2" />
           </Button>
         ) : (
           <div className="space-x-2">

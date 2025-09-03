@@ -61,9 +61,5 @@ export async function getMatchingMentors(
     return [];
   }
 
-  if (focus === "others" && data) {
-    return data.sort(() => Math.random() - 0.5).slice(0, 6);
-  }
-
   return data || [];
 }

@@ -61,13 +61,13 @@ export default function ActionsButtons() {
 
           <DialogContent className="sm:max-w-md bg-gradient-to-tr from-blue-200 to-white">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-sora mt-3 font-semibold text-center">Ready to start your quiz?</DialogTitle>
-              <DialogDescription className="mt-2 font-inter  text-lg text-center leading-snug">
+              <DialogTitle className="text-2xl font-sora mt-1 font-semibold text-center">Ready to start your quiz?</DialogTitle>
+              <DialogDescription className=" font-inter  text-lg text-center leading-snug">
                 This will help us generate personalized insights, customized
                 roadmaps, and better career options for you.
               </DialogDescription>
             </DialogHeader>
-            <div className="-mt-20">
+            <div className="-mt-24">
               <Image
                 src="/element1.png"
                 alt="logo"

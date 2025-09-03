@@ -10,6 +10,7 @@ import {
   LuBell,
   LuChevronDown,
   LuCoins,
+  LuLoader,
   LuLogOut,
   LuMail,
   LuMoon,
@@ -36,9 +37,43 @@ import {
 import { LuMessageSquareMore } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { LuWallet } from "react-icons/lu";
+import SearchBar from "./SearchBar";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Navbar() {
   const { user, loading } = useUserData();
+
+  const supabase = createClient();
+  const router = useRouter();
+  const [signoutLoading, setSignoutLoading] = useState(false);
+
+  async function signOut() {
+    setSignoutLoading(true);
+    try {
+      await supabase.auth.signOut();
+      toast.success("Signed out successfully");
+      router.push("/auth");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    } finally {
+      setSignoutLoading(false);
+    }
+  }
+
   return (
     <div className="bg-white py-4 px-4 pr-8 flex items-center gap-10 justify-between ">
       <div>
@@ -47,16 +82,10 @@ export default function Navbar() {
 
       <AnimatedAssistant />
 
-      <div className="flex items-center justify-between bg-blue-50 w-full max-w-[340px] px-2 rounded-full shadow-sm">
-        <Input
-          placeholder="Search"
-          className="bg-transparent rounded-none border-none shadow-none focus-visible:border-0 focus-visible:ring-ring/0 focus-visible:ring-0"
-        />
-        <LuSearch className="text-xl text-black" />
-      </div>
+      <SearchBar />
 
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-8">
+      <div className="flex items-center gap-8">
+        <div className="flex items-center gap-10">
           <Tooltip>
             <TooltipTrigger>
               <LuBell className="text-[22px] text-black cursor-pointer" />
@@ -94,13 +123,6 @@ export default function Navbar() {
                   height={52}
                   className="rounded-full cursor-pointer"
                 />
-                {/* <div className="flex flex-col font-inter tracking-tight max-[1280px]:hidden">
-                  <p className="font-medium font-raleway text-white capitalize tracking-tight">{user?.userName}</p>
-                  <p className="font-light text-white text-sm max-w-[130px] truncate tracking-tight">
-                    {user?.userEmail}
-                  </p>
-                </div>
-                <LuChevronDown className="text-xl text-white max-[1280px]:hidden" /> */}
               </div>
             )}
           </DropdownMenuTrigger>
@@ -163,10 +185,47 @@ export default function Navbar() {
 
               {/* Logout */}
               <DropdownMenuItem asChild className="p-0 rounded-none ">
-                <Button className="flex items-center gap-3 w-full bg-blue-600  py-2 px-3 cursor-pointer text-white">
-                  <LuLogOut className="h-5 w-5 text-white " />
-                  Logout
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button className="flex items-center gap-3 w-full bg-blue-600  py-2 px-3 cursor-pointer text-white">
+                      <LuLogOut className="h-5 w-5 text-white " />
+                      Logout
+                    </Button>
+                  </AlertDialogTrigger>
+
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className="font-semibold font-inter text-xl">
+                        Are you sure you want to logout?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="font-inter text-muted-foreground tracking-tight text-base">
+                        This will end your session and you&apos;ll need to sign
+                        in again. Despite you can simply close the tab.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="font-inter cursor-pointer">
+                        Cancel
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
+                        onClick={signOut}
+                      >
+                        {signoutLoading ? (
+                          <>
+                            <LuLoader className="animate-spin mr-2 inline" />
+                            <span>Signing Out..</span>
+                          </>
+                        ) : (
+                          <>
+                            <LuLogOut className="mr-2 inline" />
+                            <span>Logout</span>
+                          </>
+                        )}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </DropdownMenuItem>
             </DropdownMenuContent>
           )}
