@@ -85,7 +85,7 @@ export default function HomePage() {
       {/* MENTORS !! */}
 
       <div className="max-w-[1060px] mx-auto  p-2 mt-10  overflow-hidden">
-        <h2 className="text-[22px] tracking-tight font-medium font-inter mb-6 ">
+        <h2 className="text-[26px] tracking-tight font-medium font-inter mb-6 ">
           Recommended Mentors
         </h2>
 
@@ -104,7 +104,7 @@ export default function HomePage() {
               {mentors.map((m) => (
                 <Card
                   key={m.id}
-                  className="relative group max-w-[350px] max-h-[360px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
+                  className="relative group max-w-[340px] max-h-[355px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
                 >
                   {/* your existing content */}
                   <CardHeader className="flex flex-col  gap-2 p-0">
@@ -134,8 +134,8 @@ export default function HomePage() {
                         <Image
                           src={getAvatar(m)}
                           alt={m.full_name}
-                          width={120}
-                          height={120}
+                          width={110}
+                          height={110}
                           className="rounded-full object-cover border mx-auto"
                         />
 
@@ -148,11 +148,11 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <CardTitle className="text-lg  font-semibold text-center w-full font-raleway">
+                    <CardTitle className="text-lg font-semibold text-center w-full font-raleway -mt-2">
                       {m.full_name}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="-mt-3 w-full mx-auto pb-3">
+                  <CardContent className="-mt-4 w-full mx-auto pb-3">
                     <p className="font-inter bg-gradient-to-r from-blue-500 to-indigo-400 text-transparent bg-clip-text tracking-tight text-center capitalize text-base">
                       {m.current_position}
                     </p>

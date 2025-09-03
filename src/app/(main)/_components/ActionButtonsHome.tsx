@@ -54,7 +54,7 @@ export default function ActionsButtons() {
       {user?.isQuizDone === false && (
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="rounded-md shadow-md cursor-pointer font-inter text-base bg-gradient-to-b from-blue-400 to-indigo-400 text-white hover:-translate-y-1 duration-200">
+            <Button className="rounded-md shadow-md cursor-pointer font-inter text-base bg-gradient-to-b from-blue-300 to-blue-500 text-white hover:-translate-y-1 duration-200">
               Start Quiz <Activity className="ml-2" />
             </Button>
           </DialogTrigger>
