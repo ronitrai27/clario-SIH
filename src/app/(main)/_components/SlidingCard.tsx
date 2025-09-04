@@ -27,7 +27,7 @@ const SlidingCards = () => {
       id: 2,
       title: "Connect With Skilled Mentors",
       description:
-        "Learn from industry experts who will guide you through your professional journey. Accelerate your growth with personalized mentorship programs.",
+        "Learn from industry experts who will guide you through your professional journey.",
       accent: "border-purple-500",
       gradient: "from-purple-300 to-pink-400",
       textAccent: "text-purple-600",
@@ -38,7 +38,7 @@ const SlidingCards = () => {
       id: 3,
       title: "Build Your Career Path",
       description:
-        "Take control of your professional future with our comprehensive career-building tools. Plan, execute, and achieve your career goals systematically.",
+        "Take control of your professional future with our comprehensive career-building tools.",
       accent: "border-emerald-500",
       gradient: "from-amber-400 to-yellow-200",
       textAccent: "text-emerald-600",
@@ -49,7 +49,7 @@ const SlidingCards = () => {
       id: 4,
       title: "Turn Passion Into Profession",
       description:
-        "Transform what you love into a successful career. Get guidance, resources, and opportunities to align your passion with your profession.",
+        "Transform what you love into a successful career. Get guidance, resources, and opportunities.",
       accent: "border-rose-500",
       gradient: "from-rose-300 to-red-400",
       textAccent: "text-rose-600",
@@ -71,7 +71,7 @@ const SlidingCards = () => {
   };
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto p-4">
+    <div className="relative w-full max-w-[890px] mx-auto p-4">
       {/* Main Card Container */}
       <div className="relative h-56 overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
         <div
@@ -155,7 +155,7 @@ const SlidingCards = () => {
                     "border-",
                     "bg-"
                   )} rounded-full`
-                : "w-2 h-2 bg-slate-300 hover:bg-gray-400 rounded-full"
+                : "w-2 h-2 bg-slate-400 hover:bg-blue-500 rounded-full"
             }`}
           />
         ))}

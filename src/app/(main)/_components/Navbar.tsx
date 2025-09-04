@@ -75,7 +75,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="bg-gray-50 py-4 px-4 pr-8 flex items-center gap-10 justify-between ">
+    <div className="bg-gray-100 py-4 px-4 pr-8 flex items-center gap-10 justify-between ">
       <div>
         <SidebarTrigger />
       </div>
@@ -84,8 +84,8 @@ export default function Navbar() {
 
       <SearchBar />
 
-      <div className="flex items-center gap-8">
-        <div className="flex items-center gap-10">
+      <div className="flex items-center gap-14">
+        <div className="">
           <Tooltip>
             <TooltipTrigger>
               <LuBell className="text-[22px] text-black cursor-pointer" />
@@ -95,14 +95,14 @@ export default function Navbar() {
             </TooltipContent>
           </Tooltip>
 
-          <Tooltip>
+          {/* <Tooltip>
             <TooltipTrigger>
               <LuMessageSquareMore className="text-[22px] text-black cursor-pointer" />
             </TooltipTrigger>
             <TooltipContent>
               <p className="font-inter text-xs">Messages</p>
             </TooltipContent>
-          </Tooltip>
+          </Tooltip> */}
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

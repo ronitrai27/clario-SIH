@@ -40,15 +40,15 @@ type Profession =
   | "10th Student"
   | "12th Student"
   | "Diploma"
-  | "Graduate (Bachelor)"
-  | "Postgraduate (Master/PhD)";
+  | "Graduate"
+  | "Postgraduate";
 
 const PROFESSION_OPTIONS: Profession[] = [
   "10th Student",
   "12th Student",
   "Diploma",
-  "Graduate (Bachelor)",
-  "Postgraduate (Master/PhD)",
+  "Graduate",
+  "Postgraduate",
 ];
 
 const FOCUS_BY_PROFESSION: Record<Profession, string[]> = {
@@ -70,12 +70,12 @@ const FOCUS_BY_PROFESSION: Record<Profession, string[]> = {
     "Career/ Path guidance",
     "Skill building",
   ],
-  "Graduate (Bachelor)": [
+  "Graduate": [
     "Job placement",
     "Internship looking",
     "Career/ Path guidance",
   ],
-  "Postgraduate (Master/PhD)": [
+  "Postgraduate": [
     "Research opportunities",
     "Higher studies (abroad/PhD)",
     "Job placement",
@@ -234,7 +234,7 @@ export function OnboardingCard() {
           : null,
         mainFocus: data.focus ? data.focus.trim().toLowerCase() : null,
         calendarConnected: data.calendarConnected,
-        current_status: data.profession,
+        current_status: data.profession?.toLocaleLowerCase() || null,
         is_verified: true,
       };
 
@@ -353,6 +353,7 @@ export function OnboardingCard() {
                 />
               </div>
             </div>
+              <p className="text-sm -mt-3 font-inter text-muted-foreground">Make sure to write full name of your school Instituion/school.</p>
           </section>
         )}
 

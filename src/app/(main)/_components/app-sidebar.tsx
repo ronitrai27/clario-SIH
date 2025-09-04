@@ -17,6 +17,7 @@ import Image from "next/image";
 import {
   LuArrowUpRight,
   LuBrain,
+  LuCalendar,
   LuChevronDown,
   LuChevronsDownUp,
   LuCreditCard,
@@ -61,6 +62,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "@/components/ui/collapsible";
+import Link from "next/link";
 
 export function AppSidebar() {
   const { user, loading } = useUserData();
@@ -116,10 +118,12 @@ export function AppSidebar() {
                 : "hover:bg-white/10 hover:scale-105"
             }`}
               >
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuLayoutDashboard className="text-xl" />
-                  Home
-                </p>
+                <Link href="/home" className="w-full">
+                  <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                    <LuLayoutDashboard className="text-xl" />
+                    Home
+                  </p>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             {/* Mentor Connect */}
@@ -143,10 +147,12 @@ export function AppSidebar() {
             {/* MESSAGES */}
             <SidebarMenuItem className="">
               <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuMessageCircle className="text-xl" />
-                  Messages
-                </p>
+                <Link href="/home/calendar" className="w-full">
+                  <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                    <LuCalendar className="text-xl" />
+                    Calendar
+                  </p>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             {/* COMMUNITY */}
@@ -168,7 +174,6 @@ export function AppSidebar() {
                   <LuChevronDown className="text-xl group-hover:text-black " />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
-
               <CollapsibleContent>
                 <SidebarMenuSub className="pl-2 mt-3 space-y-2">
                   <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
@@ -177,9 +182,9 @@ export function AppSidebar() {
                   <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
                     AI Roadmap
                   </SidebarMenuSubItem>
-                  {user?.current_status !== "10th Student" &&
-                    user?.current_status !== "12th Student" && (
-                      <SidebarMenuSubItem className="font-raleway font-medium text-gray-200 cursor-pointer text-base hover:text-blue-500">
+                  {user?.current_status !== "10th student" &&
+                    user?.current_status !== "12th student" && (
+                      <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
                         AI Resume Analyser
                       </SidebarMenuSubItem>
                     )}
@@ -192,9 +197,8 @@ export function AppSidebar() {
       <SidebarFooter className="px-1 overflow-hidden">
         <div className="mb-4 bg-gradient-to-br from-white via-blue-200 to-blue-400 w-[96%] mx-auto h-[120px] rounded-lg px-2 py-3">
           <div className="flex items-center gap-3">
-           
-              <LuWallet className="text-2xl text-blue-600" />
-           
+            <LuWallet className="text-2xl text-blue-600" />
+
             <h2 className="font-raleway font-semibold text-base">Credits</h2>
           </div>
           <div className="flex  justify-between">
@@ -204,7 +208,7 @@ export function AppSidebar() {
               </p>
 
               <button className="text-xs tracking-tight font-inter cursor-pointer text-blue-600 bg-gray-100/40 hover:bg-gray-100/70  px-2 rounded-sm flex items-center gap-2 mt-3">
-                Top Up <Sparkle  className="" size={20}/>
+                Top Up <Sparkle className="" size={20} />
               </button>
             </div>
             <Image
