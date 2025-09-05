@@ -143,7 +143,7 @@ export default function HomePage() {
                         key={m.id}
                         className="relative group max-w-[300px] max-h-[285px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
                       >
-                        {/* your existing content */}
+                     
                         <CardHeader className="flex flex-col  gap-2 p-0">
                           <div className="relative w-full py-2">
                             <div
@@ -169,7 +169,7 @@ export default function HomePage() {
                                 className="rounded-full object-cover border mx-auto"
                               />
 
-                              <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 bg-white border border-yellow-600 py-1 px-5 rounded-full">
+                              <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 bg-white border border-yellow-600 px-4 rounded-full">
                                 <span className="font-inter text-sm font-medium text-amber-500 flex items-center gap-1">
                                   {m.rating}{" "}
                                   <LuStar className="inline fill-yellow-500 ml-1" />
