@@ -28,23 +28,6 @@ export default function AuthPage() {
   const [isSignup, setIsSignup] = useState<boolean>(false);
   const supabase = createClient();
 
-  const handleLogin = async (provider: "google" | "discord") => {
-    // console.log(provider);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth-mentor/callback`,
-        // queryParams: {
-        //   role: "mentor",
-        // },
-      },
-    });
-
-    if (error) {
-      console.error("Login error:", error.message);
-      toast.error(error.message);
-    }
-  };
 
   async function HandleAuth() {
     setLoading(true);
@@ -58,7 +41,7 @@ export default function AuthPage() {
           options: {
             data: { role: "mentor" },
             emailRedirectTo: `${window.location.origin}/email-verified`,
-            // captchaToken: token || undefined,
+            captchaToken: token || undefined,
           },
         });
 
@@ -74,7 +57,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            // captchaToken: token || undefined,
+            captchaToken: token || undefined,
           },
         });
 
@@ -147,54 +130,14 @@ export default function AuthPage() {
               </div>
             </Link>
 
-            <p className="text-center -mt-5 mb-10 font-raleway text-xl font-semibold">
+            <p className="text-center -mt-8 mb-10 font-raleway text-2xl font-semibold">
               Mentor Portal
             </p>
-            <div className="flex flex-col gap-3">
-              <Button
-                className="font-inter text-sm tracking-wide bg-blue-50 text-black rounded border shadow-sm hover:bg-blue-100 hover:scale-105 hover:border-blue-400 cursor-pointer w-[280px] py-5"
-                onClick={() => handleLogin("google")}
-              >
-                <Image
-                  src="/search.png"
-                  alt="Google"
-                  width={25}
-                  height={25}
-                  className="mr-5"
-                />{" "}
-                continue with Google
-              </Button>
-              <Button
-                className="font-inter text-sm tracking-wide bg-blue-50 text-black rounded border shadow-sm  hover:bg-blue-100 hover:scale-105 hover:border-blue-400 cursor-pointer  w-[280px] py-5"
-                onClick={() => handleLogin("discord")}
-              >
-                <Image
-                  src="/discord.png"
-                  alt="Google"
-                  width={25}
-                  height={25}
-                  className="mr-5"
-                />{" "}
-                continue with Discord
-              </Button>
-              {/* <Button
-                className="font-inter text-sm tracking-wide bg-blue-50 text-black rounded border shadow-sm  hover:bg-blue-100 hover:scale-105 hover:border-blue-400 cursor-pointer  w-[280px] py-5"
-                onClick={() => handleLogin("slack_oidc")}
-              >
-                <Image
-                  src="/slack.png"
-                  alt="Google"
-                  width={25}
-                  height={25}
-                  className="mr-5"
-                />{" "}
-                continue with Slack
-              </Button> */}
-            </div>
+          
             {/* ---- */}
-            <p className="font-inter text-base font-light my-7">
+            <p className="font-inter text-base font-light mb-7">
               {" "}
-              or continue with{" "}
+              Continue with{" "}
               <span className="font-medium font-raleway  text-blue-500  ml-4">
                 {isSignup ? "Creating Account" : "Logging In"}
               </span>

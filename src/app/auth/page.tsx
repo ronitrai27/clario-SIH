@@ -57,7 +57,7 @@ export default function AuthPage() {
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/email-verified`,
-            // captchaToken: token || undefined,
+            captchaToken: token || undefined,
             data: { role: "user" },
           },
         });
@@ -74,7 +74,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            // captchaToken: token || undefined,
+            captchaToken: token || undefined,
           },
         });
 
@@ -228,13 +228,6 @@ export default function AuthPage() {
         </div>
         {/* RIGHT SIDE */}
         <div className="h-screen w-[55%] bg-blue-700 relative">
-          {/* <Silk
-            speed={5}
-            scale={1}
-            color="#005eff"
-            noiseIntensity={1.5}
-            rotation={0}
-          /> */}
           <div
             className="absolute inset-0 z-0"
             style={{
