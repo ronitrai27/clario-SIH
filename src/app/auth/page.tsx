@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
 import { LuChevronRight, LuInfo, LuLoader } from "react-icons/lu";
 import { AnimatedGradientTextDemo } from "./_components/GerdaientText";
-import Silk from "@/components/Silk/Silk";
+// import Silk from "@/components/Silk/Silk";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -189,7 +189,7 @@ export default function AuthPage() {
               />
 
               <Button
-                className="rounded border font-raleway cursor-pointer"
+                className="rounded border font-sora cursor-pointer bg-black"
                 disabled={loading}
                 onClick={HandleAuth}
               >
@@ -240,34 +240,7 @@ export default function AuthPage() {
       `,
             }}
           />
-          {/* <div
-            className="absolute inset-0 z-0"
-            style={{
-              background: `
-      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(90, 70, 200, 0.85), transparent 70%),
-      radial-gradient(ellipse 70% 60% at 20% 80%, rgba(40, 120, 220, 0.75), transparent 70%),
-      radial-gradient(ellipse 65% 55% at 60% 65%, rgba(0, 180, 255, 0.55), transparent 70%),
-      radial-gradient(ellipse 65% 40% at 50% 60%, rgba(180, 60, 200, 0.55), transparent 70%),
-      radial-gradient(ellipse 60% 45% at 40% 75%, rgba(140, 90, 220, 0.5), transparent 70%),
-      radial-gradient(ellipse 60% 50% at 65% 35%, rgba(255, 220, 120, 0.35), transparent 70%),
-      linear-gradient(180deg, #0f172a 0%, #1e1b4b 60%, #1e293b 100%)
-    `,
-            }}
-          /> */}
-
-          {/* <div
-            className="absolute inset-0 z-0"
-            style={{
-              background: `
-      radial-gradient(ellipse 80% 60% at 5% 40%, rgba(190, 40, 100, 0.65), transparent 70%),   
-      radial-gradient(ellipse 70% 60% at 45% 45%, rgba(255, 80, 160, 0.55), transparent 70%), 
-      radial-gradient(ellipse 62% 52% at 83% 76%, rgba(255, 200, 60, 0.55), transparent 65%), 
-      radial-gradient(ellipse 60% 48% at 75% 20%, rgba(60, 140, 255, 0.55), transparent 70%), 
-      linear-gradient(45deg, #f5d0fe 0%, #fecdd3 100%)                                        
-    `,
-            }}
-          /> */}
-
+         
           <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
             <AnimatedGradientTextDemo />
           </div>

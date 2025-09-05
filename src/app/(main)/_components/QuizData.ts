@@ -1,6 +1,6 @@
 export const quizData = {
   "12": {
-    "12th Student": {
+    "12th student": {
       "crack competitive exams": {
         focus_specific: [
           {
@@ -95,21 +95,11 @@ export const quizData = {
             ],
           },
         ],
-        learning_style: [
-          {
-            question: "How fast do you usually learn new concepts?",
-            options: ["Fast", "Average", "Slow"],
-          },
-          {
-            question: "What type of content helps you learn best?",
-            options: [
-              "Visual (diagrams)",
-              "Reading (textual)",
-              "Short summaries / key points",
-            ],
-          },
-        ],
         deep_understanding: [
+            {
+            question:
+              "Tell us about your interests and hobbies outside academics.",
+          },
           {
             question:
               "What is your biggest confusion about choosing a career path?",
@@ -185,11 +175,11 @@ export const quizData = {
     },
   },
   "10": {
-    "10th Student": {
-      "career/ path guidance": {
+    "10th student": {
+      "career/ path guidance": { 
         focus_specific: [
           {
-            question: "What subjects are you most interested in?",
+            question: "In Which Stream are you most interested in?",
             options: ["Medical", "Commerce", "Arts", "Non-Medical"],
           },
           {
@@ -217,21 +207,6 @@ export const quizData = {
             ],
           },
         ],
-        learning_style: [
-          {
-            question: "How fast do you learn new topics?",
-            options: ["Very fast", "Average", "Take time"],
-          },
-          {
-            question: "What type of content helps you learn best?",
-            options: [
-              "Visual (diagrams)",
-              "Reading (textual)",
-              "Short summaries / key points",
-            ],
-          },
-        ],
-
         deep_understanding: [
           {
             question: "What is your biggest confusion about choosing a career?",

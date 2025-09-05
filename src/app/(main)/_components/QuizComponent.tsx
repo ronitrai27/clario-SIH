@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -6,10 +7,23 @@ import { useUserData } from "@/context/UserDataProvider";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Activity } from "lucide-react";
-import { LuArrowBigRight, LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import axios from "axios";
+import {
+  LuArrowBigRight,
+  LuArrowLeft,
+  LuArrowRight,
+  LuLoader,
+} from "react-icons/lu";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Quiz() {
   const { user } = useUserData();
+  const supabase = createClient();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const current_status = user?.current_status;
   const mainFocus = user?.mainFocus;
   const [step, setStep] = useState(0);
@@ -68,15 +82,48 @@ export default function Quiz() {
 
   const progress = ((step + 1) / allQuestions.length) * 100;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // merge questions + answers
-    const result = allQuestions.map((q) => ({
+    const result = allQuestions.map((q: any) => ({
       section: q.section,
       question: q.question.question,
       answer: answers[q.section]?.[q.index] || "",
     }));
 
     console.log("Final Quiz Data:", JSON.stringify(result, null, 2));
+
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/ai/quiz-feedback", {
+        quizData: result,
+        userStatus: user.current_status, 
+        mainFocus: user.mainFocus, 
+      });
+
+      const { data } = res.data;
+      console.log("Career Insights: from LLM ", data);
+      const { error } = await supabase.from("userQuizData").insert([
+        {
+          userId: user.id,
+          user_current_status: user.current_status,
+          user_mainFocus: user.mainFocus,
+          quizInfo: data.insights, // JSONB
+        },
+      ]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        toast.error("Failed to save quiz data. Please try again.");
+      } else {
+        console.log("Quiz + Insights saved successfully!");
+        toast.success("Quiz submitted successfully!");
+      }
+    } catch (err: any) {
+      console.error("❌ handleSubmit error:", err.message || err);
+      toast.error(err.message || "Failed to submit quiz. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (finished) {
@@ -86,7 +133,7 @@ export default function Quiz() {
           <Activity className="text-2xl text-blue-500" />
         </div>
         <h2 className="text-2xl font-bold font-sora text-blue-500">
-           Quiz Completed!
+          Quiz Completed!
         </h2>
         <p className="text-gray-700 font-inter text-lg">
           Great job {user?.userName}! You’ve reached the end of the quiz.
@@ -95,6 +142,7 @@ export default function Quiz() {
         <div className="flex justify-center gap-4 mt-6">
           <Button
             variant="outline"
+            disabled={loading}
             onClick={() => {
               setAnswers({});
               setStep(0);
@@ -104,10 +152,21 @@ export default function Quiz() {
           >
             Retake Quiz
           </Button>
-          <Button className="bg-blue-500 text-white" onClick={handleSubmit}>
+          <Button
+            disabled={loading}
+            className="bg-blue-500 text-white"
+            onClick={handleSubmit}
+          >
             Submit Quiz
           </Button>
         </div>
+
+        {loading && (
+          <p className="text-gray-500 text-lg mt-8 font-inter text-center flex items-center gap-2 justify-center">
+            <LuLoader className="animate-spin mr-2" />
+            Analyzing Response...
+          </p>
+        )}
       </div>
     );
   }
@@ -211,7 +270,7 @@ export default function Quiz() {
         ) : (
           <Button
             className="bg-blue-500 cursor-pointer text-white"
-            onClick={() => setFinished(true)} 
+            onClick={() => setFinished(true)}
           >
             Finish <LuArrowRight className="inline ml-2" />
           </Button>

@@ -57,9 +57,9 @@ export default function CallbackPage() {
   const router = useRouter();
   const { user, loading, ensureUserInDB, isNewUser } = useUserData();
 
-  useEffect(() => {
-    ensureUserInDB();
-  }, []);
+  // useEffect(() => {
+  //   ensureUserInDB();
+  // }, []);
 
   useEffect(() => {
     if (!loading && user) {

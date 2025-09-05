@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
 import { LuChevronRight, LuInfo, LuLoader } from "react-icons/lu";
-
+import { AnimatedGradientTextDemo } from "@/app/auth/_components/GerdaientText";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -28,13 +28,55 @@ export default function AuthPage() {
   const [isSignup, setIsSignup] = useState<boolean>(false);
   const supabase = createClient();
 
+  // async function HandleAuth() {
+  //   setLoading(true);
+  //   setError("");
+  //   try {
+  //     if (isSignup) {
+  //       // signup functionality
+  //       const { data, error } = await supabase.auth.signUp({
+  //         email,
+  //         password,
+  //         options: {
+  //           data: { role: "mentor" },
+  //           emailRedirectTo: `${window.location.origin}/email-verified`,
+  //           captchaToken: token || undefined,
+  //         },
+  //       });
+
+  //       if (error) throw error;
+  //       // for email verification
+  //       if (data.user && !data.session) {
+  //         setError("Please check your email for verification link");
+  //         return;
+  //       }
+  //     } else {
+  //       // login functionality
+  //       const { data, error } = await supabase.auth.signInWithPassword({
+  //         email,
+  //         password,
+  //         options: {
+  //           captchaToken: token || undefined,
+  //         },
+  //       });
+
+  //       if (error) throw error;
+  //       if (data.session) {
+  //         router.push("/auth-mentor/callback");
+  //       }
+  //     }
+  //   } catch (err: any) {
+  //     setError(err.error_description || err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   async function HandleAuth() {
     setLoading(true);
     setError("");
     try {
       if (isSignup) {
-        // signup functionality
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
@@ -46,13 +88,11 @@ export default function AuthPage() {
         });
 
         if (error) throw error;
-        // for email verification
         if (data.user && !data.session) {
           setError("Please check your email for verification link");
           return;
         }
       } else {
-        // login functionality
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -69,6 +109,8 @@ export default function AuthPage() {
     } catch (err: any) {
       setError(err.error_description || err.message);
     } finally {
+      captchaRef.current?.resetCaptcha();
+      setToken("");
       setLoading(false);
     }
   }
@@ -91,7 +133,7 @@ export default function AuthPage() {
             }}
           />
           <div className="absolute top-[16%] left-1/2 -translate-x-1/2 -translate-y-1/2">
-            {/* <AnimatedGradientTextDemo /> */}
+            <AnimatedGradientTextDemo />
           </div>
           <div className="absolute inset-0 ">
             <Image
@@ -99,11 +141,11 @@ export default function AuthPage() {
               alt="Clario"
               width={100}
               height={100}
-              className="absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+              className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
+          <div className="absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full ">
             <h1 className="text-[54px] font-bold text-white/70 font-sora tracking-tight text-center leading-tight">
               &quot;Empowering minds through <br />{" "}
               <span className="">your experience</span>&quot;
@@ -133,9 +175,9 @@ export default function AuthPage() {
             <p className="text-center -mt-8 mb-10 font-raleway text-2xl font-semibold">
               Mentor Portal
             </p>
-          
+
             {/* ---- */}
-            <p className="font-inter text-base font-light mb-7">
+            <p className="font-inter text-lg font-light mb-7">
               {" "}
               Continue with{" "}
               <span className="font-medium font-raleway  text-blue-500  ml-4">
@@ -143,7 +185,7 @@ export default function AuthPage() {
               </span>
             </p>
 
-            <div className="flex flex-col gap-5 w-full max-w-[320px] mx-auto">
+            <div className="flex flex-col gap-5 w-full max-w-[320px] mx-auto ">
               <div className="flex items-center justify-center gap-2 ">
                 <Label className="font-inter">Email</Label>
                 <Input
@@ -154,7 +196,7 @@ export default function AuthPage() {
                   className="w-full rounded border "
                 />
               </div>
-              <div className="flex items-center justify-center gap-2 ">
+              <div className="flex items-center justify-center gap-2 mb-5">
                 <Label className="font-inter">Pass</Label>
                 <Input
                   placeholder="Enter your password"
@@ -174,7 +216,7 @@ export default function AuthPage() {
               />
 
               <Button
-                className="rounded border font-raleway cursor-pointer"
+                className="rounded border font-raleway cursor-pointer bg-black"
                 disabled={loading}
                 onClick={HandleAuth}
               >

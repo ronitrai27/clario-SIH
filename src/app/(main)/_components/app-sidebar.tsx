@@ -26,6 +26,7 @@ import {
   LuLoader,
   LuLogOut,
   LuMessageCircle,
+  LuMessageSquare,
   LuSettings,
   LuShapes,
   LuSun,
@@ -109,22 +110,20 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarMenu className="p-2 space-y-2.5">
             {/* HOME */}
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                className={`flex cursor-pointer duration-200 ease-in-out rounded 
+            <SidebarMenuItem
+              className={`flex cursor-pointer duration-200 ease-in-out rounded py-1 px-3
             ${
               pathname === "/home"
                 ? "bg-blue-400 scale-105 hover:bg-white/10"
                 : "hover:bg-white/10 hover:scale-105"
             }`}
-              >
-                <Link href="/home" className="w-full">
-                  <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                    <LuLayoutDashboard className="text-xl" />
-                    Home
-                  </p>
-                </Link>
-              </SidebarMenuButton>
+            >
+              <Link href="/home" className="w-full">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuLayoutDashboard className="text-xl" />
+                  Home
+                </p>
+              </Link>
             </SidebarMenuItem>
             {/* Mentor Connect */}
             <SidebarMenuItem className="">
@@ -156,13 +155,11 @@ export function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
             {/* COMMUNITY */}
-            <SidebarMenuItem className="">
-              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuShapes className="text-xl" />
-                  Community
-                </p>
-              </SidebarMenuButton>
+            <SidebarMenuItem className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded py-1 px-2">
+              <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                <LuMessageSquare className="text-xl" />
+                Messages
+              </p>
             </SidebarMenuItem>
             {/* AI TOOLS COLLAPSIBLE */}
             <Collapsible className="mt-2" defaultOpen={true}>

@@ -71,7 +71,7 @@ const SlidingCards = () => {
   };
 
   return (
-    <div className="relative w-full max-w-[890px] mx-auto p-4">
+    <div className="relative w-full max-w-[895px] mx-auto p-4">
       {/* Main Card Container */}
       <div className="relative h-56 overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
         <div

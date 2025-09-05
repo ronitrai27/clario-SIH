@@ -11,7 +11,7 @@ const HomeCalendar = () => {
         mode="single"
         selected={date}
         onSelect={setDate}
-        className="w-full rounded-md border shadow-sm font-sora "
+        className="w-full max-w-[280px] mx-auto rounded-md border shadow-sm font-sora "
         captionLayout="label"
       />
     </div>
