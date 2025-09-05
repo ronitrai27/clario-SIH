@@ -1,24 +1,9 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/client";
+import { DBUser, DBMentor } from "../types/allTypes"; 
 
-type DBMentor = {
-  id: string;
-  full_name: string;
-  email: string;
-  phone: string | null;
-  linkedin: string | null;
-  bio: string | null;
-  expertise: string[];
-  current_position: string;
-  availability: boolean;
-  rating: number;
-  avatar: string | null;
-  created_at: string;
-  is_verified: boolean;
-};
 
-// group mapping for similar expertise
 const expertiseGroups: Record<string, string[]> = {
   "career/ path guidance": [
     "career/ path guidance",
@@ -62,4 +47,27 @@ export async function getMatchingMentors(
   }
 
   return data || [];
+}
+
+export async function getRandomUsersByInstitution(institutionName: string, currentUserId: number): Promise<DBUser[]> {
+  const supabase = createClient();
+
+  // fetch users from same institution
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("institutionName", institutionName)
+    .neq("id", currentUserId) 
+    .limit(10); 
+
+  if (error) {
+    console.error("Error fetching users:", error.message);
+    return [];
+  }
+
+  if (!data) return [];
+
+  // shuffle + take 5
+  const shuffled = data.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, 5);
 }

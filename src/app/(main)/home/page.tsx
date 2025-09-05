@@ -5,20 +5,31 @@ import { useUserData } from "@/context/UserDataProvider";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import SlidingCards from "../_components/SlidingCard";
 import ActionsButtons from "../_components/ActionButtonsHome";
-import { getMatchingMentors } from "@/lib/functions/dbActions";
+import {
+  getMatchingMentors,
+  getRandomUsersByInstitution,
+} from "@/lib/functions/dbActions";
 import { useEffect, useState } from "react";
 import { DBMentor } from "@/lib/types/allTypes";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import Rating from "@mui/material/Rating";
-import { LuActivity, LuFilter, LuPen, LuScreenShare, LuSearch, LuStar } from "react-icons/lu";
+// import Rating from "@mui/material/Rating";
+import {
+  LuActivity,
+  LuFilter,
+  LuPen,
+  LuScreenShare,
+  LuSearch,
+  LuStar,
+} from "react-icons/lu";
 import HomeCalendar from "../_components/HomeCalendar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
+import { DBUser } from "@/lib/types/allTypes";
 
 const fallbackAvatars = [
   "/a1.png",
@@ -35,6 +46,8 @@ export default function HomePage() {
   const { user, loading, ensureUserInDB } = useUserData();
   const [mentors, setMentors] = useState<DBMentor[]>([]);
   const [mentorLoading, setMentorLoading] = useState<boolean>(false);
+  const [discoverUsers, setDiscoverUsers] = useState<DBUser[]>([]);
+  const [discoverLoading, setDiscoverLoading] = useState(false);
 
   useEffect(() => {
     ensureUserInDB();
@@ -45,7 +58,7 @@ export default function HomePage() {
     const randomIndex = Math.floor(Math.random() * fallbackAvatars.length);
     return fallbackAvatars[randomIndex];
   };
-
+  // SHOWING MENTORS---------------------------------------
   useEffect(() => {
     if (!user || !user.mainFocus) return;
     if (mentors.length > 0) return;
@@ -53,6 +66,17 @@ export default function HomePage() {
     getMatchingMentors(user?.mainFocus)
       .then((data) => setMentors(data))
       .finally(() => setMentorLoading(false));
+  }, [user]);
+
+  // DISCOVER USERS FROM SAME INSTITUTION---------------------------
+  useEffect(() => {
+    if (!user || !user.institutionName) return;
+    if (discoverUsers.length > 0) return;
+
+    setDiscoverLoading(true);
+    getRandomUsersByInstitution(user.institutionName, user.id)
+      .then((data) => setDiscoverUsers(data))
+      .finally(() => setDiscoverLoading(false));
   }, [user]);
 
   const avatarBgColors = [
@@ -70,7 +94,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="h-full  bg-gray-100 py-6 px-4 w-full overflow-hidden">
+    <div className="h-full  bg-gray-50 py-6 pl-0 pr-4 w-full overflow-hidden">
       <div className="flex h-full justify-between overflow-hidden ">
         {/*---------- Left side--------------- */}
         <div className="w-[75%]">
@@ -182,30 +206,72 @@ export default function HomePage() {
               <p className="text-base font-inter font-semibold">Activity</p>
               <LuActivity className="text-blue-600 text-xl" />
             </div>
-            <div className="relative flex items-center  px-2 bg-gray-100 rounded-md mt-3">
+            <div className="relative flex items-center  px-2 bg-gray-50 border border-gray-200 rounded-md mt-3">
               <LuSearch className=" text-gray-600 -mr-1" />
               <Input
                 type="text"
                 placeholder="Search..."
                 className="border-none rounded-none shadow-none focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 font-inter"
-                />
-                <LuFilter className=" text-gray-600" />
+              />
+              <LuFilter className=" text-gray-600" />
             </div>
-            <Tabs defaultValue="messages" className="h-full flex flex-col mt-4 ">
+            <Tabs
+              defaultValue="messages"
+              className="h-full flex flex-col mt-4 "
+            >
               <TabsList className="flex w-full justify-start gap-4 bg-gray-50">
-                <TabsTrigger value="messages" className="font-inter">Messages</TabsTrigger>
-                <TabsTrigger value="discover" className="font-inter">Discover</TabsTrigger>
+                <TabsTrigger value="messages" className="font-inter">
+                  Messages
+                </TabsTrigger>
+                <TabsTrigger value="discover" className="font-inter">
+                  Discover
+                </TabsTrigger>
               </TabsList>
               <div className="flex-1 mt-4 overflow-y-auto">
                 <TabsContent value="messages" className="h-full">
                   <div className="flex items-center justify-center h-full text-gray-500">
-                    No messages yet 
+                    No messages yet
                   </div>
                 </TabsContent>
                 <TabsContent value="discover" className="h-full">
-                  <div className="flex items-center justify-center h-full text-gray-500">
-                    Discover new content 
-                  </div>
+                  {discoverUsers.length === 0 ? (
+                    <div className="flex items-center justify-center h-full text-gray-500">
+                      No users found
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      {discoverUsers.map((u) => (
+                        <div
+                          key={u.id}
+                          className="flex items-center justify-between  p-2 "
+                        >
+                          {/* Left: avatar + details */}
+                          <div className="flex items-center gap-3">
+                            <Image
+                              src={u.avatar || "/user.png"}
+                              alt={u.userName}
+                              width={35}
+                              height={35}
+                              className=" rounded-full object-cover"
+                            />
+                            <div>
+                              <p className="font-medium text-sm tracking-tight font-inter">
+                                {u.userName}
+                              </p>
+                              <p className="text-sm text-muted-foreground font-inter max-w-[120px] truncate">
+                                {u.institutionName}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Right: message button */}
+                          <button className="px-3 py-1 text-xs tracking-tight font-inter bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition">
+                            Message
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </TabsContent>
               </div>
             </Tabs>

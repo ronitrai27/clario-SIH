@@ -13,3 +13,21 @@ export type DBMentor = {
   created_at: string;
   is_verified: boolean;
 };
+
+export type DBUser =  {
+  id: number;
+  userName: string;
+  userEmail: string;
+  avatar: string;
+  created_at: string;
+  totalCredits: number;
+  remainingCredits: number;
+  invite_link: string;
+  current_status: string;
+  userPhone: string;
+  institutionName: string;
+  mainFocus: string;
+  calendarConnected: boolean;
+  is_verified: boolean;
+  isQuizDone: boolean;
+}
