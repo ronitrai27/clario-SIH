@@ -18,7 +18,7 @@ export default function ActionBox() {
     status === "10th student" || status === "12th student";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-7 my-12 px-6 max-w-[1000px] mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-16 mb-12 px-6 max-w-[1000px] mx-auto">
       {/* Common for both */}
       <div className="relative overflow-hidden rounded-md shadow-lg px-3 py-2 text-black hover:scale-105 transition bg-gradient-to-br from-white via-white to-blue-200 cursor-pointer  border-l-8 border-blue-500"> 
         <div className="flex  items-center gap-4">

@@ -109,7 +109,7 @@ export default function HomePage() {
                 <Skeleton className="h-[40px] w-[300px] rounded-full" />
               </div>
             ) : (
-              <div className="mt-2 max-w-[800px]  mx-auto flex justify-between items-center">
+              <div className="mt-3 max-w-[800px]  mx-auto flex justify-between items-center">
                 <h1 className="text-4xl font-semibold font-inter tracking-tight">
                   Welcome, {user?.userName}
                 </h1>
