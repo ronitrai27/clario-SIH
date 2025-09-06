@@ -73,7 +73,7 @@ const SlidingCards = () => {
   return (
     <div className="relative w-full max-w-[895px] mx-auto p-4">
       {/* Main Card Container */}
-      <div className="relative h-56 overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
+      <div className="relative h-60 overflow-hidden rounded-xl border border-gray-200 shadow-sm bg-white">
         <div
           className="flex transition-transform duration-700 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
