@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use server";
 
 import { createClient } from "@/lib/supabase/client";
-import { DBUser, DBMentor } from "../types/allTypes"; 
+import { DBUser, DBMentor, UserQuizData } from "../types/allTypes"; 
 
 
 const expertiseGroups: Record<string, string[]> = {
@@ -70,4 +72,20 @@ export async function getRandomUsersByInstitution(institutionName: string, curre
   // shuffle + take 5
   const shuffled = data.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 5);
+}
+
+export async function getUserQuizData(userId: any): Promise<UserQuizData[]> {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from("userQuizData")
+    .select("*")
+    .eq("userId", userId);
+
+  if (error) {
+    console.error("Error fetching quiz data:", error);
+    return [];
+  }
+
+  return data as UserQuizData[];
 }

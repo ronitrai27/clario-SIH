@@ -151,10 +151,7 @@ const SlidingCards = () => {
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 cursor-pointer ${
               index === currentSlide
-                ? `w-8 h-2 bg-blue-500 ${card.accent.replace(
-                    "border-",
-                    "bg-"
-                  )} rounded-full`
+                ? `w-8 h-2 bg-blue-500 rounded-full`
                 : "w-2 h-2 bg-slate-400 hover:bg-blue-500 rounded-full"
             }`}
           />

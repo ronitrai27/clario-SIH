@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type DBMentor = {
   id: string;
   full_name: string;
@@ -30,4 +31,13 @@ export type DBUser =  {
   calendarConnected: boolean;
   is_verified: boolean;
   isQuizDone: boolean;
+}
+
+export type UserQuizData =  {
+  id: number; 
+  created_at: string; 
+  quizInfo: Record<string, any>; //depends on user current_status and mainFocus
+  userId: string; 
+  user_current_status: string; 
+  user_mainFocus: string; 
 }

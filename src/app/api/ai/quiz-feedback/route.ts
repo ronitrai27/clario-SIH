@@ -33,8 +33,8 @@ function getSchemaAndPrompt(userStatus: string, mainFocus: string) {
     Your task:
     - stream (detected stream from answers)
     - confidence (student's confidence level)
-    - degree (list of 2-3 relevant degrees for this student according to their stream and careerOptions. for example: BCA/MBA, B.TECH/M.TECH etc.)
-    - summary (3-line summary about student profile)
+    - degree (list of 2-3 relevant degrees for this student according to their stream and careerOptions both. for example: BCA/MBA, B.TECH/M.TECH etc.)
+    - summary (4-line summary about student profile)
     - careerOptions (list of 5 future career paths suitable for this student)
 
     Return ONLY JSON in this format:
@@ -65,7 +65,7 @@ function getSchemaAndPrompt(userStatus: string, mainFocus: string) {
     - stream (main stream of interest)
     - confidence (student's confidence level in that stream)
     - reason (why student chose these subjects)
-    - summary (3-line profile summary of the student)
+    - summary (4-line profile summary of the student)
     - careerOptions (5 long-term career paths suitable for them according to their chosen stream)
 
     Return ONLY JSON in this format:
