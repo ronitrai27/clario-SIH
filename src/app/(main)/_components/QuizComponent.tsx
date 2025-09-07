@@ -90,18 +90,18 @@ export default function Quiz() {
       answer: answers[q.section]?.[q.index] || "",
     }));
 
-    console.log("Final Quiz Data:", JSON.stringify(result, null, 2));
+    // console.log("Final Quiz Data:", JSON.stringify(result, null, 2));
 
     setLoading(true);
     try {
       const res = await axios.post("/api/ai/quiz-feedback", {
         quizData: result,
-        userStatus: user.current_status, 
-        mainFocus: user.mainFocus, 
+        userStatus: user.current_status,
+        mainFocus: user.mainFocus,
       });
 
       const { data } = res.data;
-      console.log("Career Insights: from LLM ", data);
+      // console.log("Career Insights: from LLM ", data);
       const { error } = await supabase.from("userQuizData").insert([
         {
           userId: user.id,
@@ -116,7 +116,22 @@ export default function Quiz() {
         toast.error("Failed to save quiz data. Please try again.");
       } else {
         console.log("Quiz + Insights saved successfully!");
+        const { error: updateError } = await supabase
+          .from("users")
+          .update({ isQuizDone: true })
+          .eq("id", user.id);
+
+        if (updateError) {
+          console.error("Supabase update error:", updateError);
+          toast.error("Failed to update user status.");
+          return;
+        }
+
+        localStorage.setItem("quizDone", "true");
+
         toast.success("Quiz submitted successfully!");
+
+        router.push("/home");
       }
     } catch (err: any) {
       console.error("❌ handleSubmit error:", err.message || err);

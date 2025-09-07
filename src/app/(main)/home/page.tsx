@@ -22,6 +22,7 @@ import {
   LuActivity,
   LuCircleFadingPlus,
   LuFilter,
+  LuMailbox,
   LuPen,
   LuScreenShare,
   LuSearch,
@@ -34,7 +35,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { DBUser } from "@/lib/types/allTypes";
 import ActionBox from "../_components/ActionBox";
-import { Ghost, PlusCircle } from "lucide-react";
+import { CheckCircle, Ghost, Map, PlusCircle, Sparkles, Users } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 
 const fallbackAvatars = [
   "/a1.png",
@@ -53,6 +55,7 @@ export default function HomePage() {
   const [mentorLoading, setMentorLoading] = useState<boolean>(false);
   const [discoverUsers, setDiscoverUsers] = useState<DBUser[]>([]);
   const [discoverLoading, setDiscoverLoading] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     ensureUserInDB();
@@ -83,6 +86,20 @@ export default function HomePage() {
       .then((data) => setDiscoverUsers(data))
       .finally(() => setDiscoverLoading(false));
   }, [user]);
+
+  // HANDLE SHOW DIALOG ON QUIZ COMPLETE-----------------------
+
+  useEffect(() => {
+    const quizDone = localStorage.getItem("quizDone");
+    if (quizDone === "true") {
+      setOpen(true);
+    }
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+    localStorage.removeItem("quizDone"); 
+  };
 
   const avatarBgColors = [
     "bg-yellow-200",
@@ -125,7 +142,8 @@ export default function HomePage() {
           {/* MENTORS !! */}
           <div className="max-w-[880px] mx-auto mt-8 bg-white p-2 rounded-xl  overflow-hidden">
             <h2 className="text-[26px] pt-4 tracking-tight font-medium font-inter mb-3 pl-2">
-              Recommended Mentors <LuUsersRound className="inline ml-2 text-blue-500" />
+              Recommended Mentors{" "}
+              <LuUsersRound className="inline ml-2 text-blue-500" />
             </h2>
 
             {mentorLoading || loading ? (
@@ -245,7 +263,7 @@ export default function HomePage() {
           <div className="w-full h-[466px] bg-white rounded-xl shadow px-2 py-4">
             <div className="flex items-center justify-between px-4">
               <p className="text-base font-inter font-semibold">Activity</p>
-              <LuActivity className="text-blue-600 text-xl" />
+              <LuActivity className="text-gray-600 text-xl " />
             </div>
             <div className="relative flex items-center  px-2 bg-gray-50 border border-gray-200 rounded-md mt-3">
               <LuSearch className=" text-gray-600 -mr-1" />
@@ -322,9 +340,75 @@ export default function HomePage() {
           </div>
 
           {/* INBOX */}
-          <div className="w-full h-[340px] bg-white rounded-xl shadow"></div>
+          <div className="w-full h-[340px] bg-white rounded-xl shadow p-4">
+            <div className="flex items-center justify-between px-4">
+              <h2 className="text-base font-inter font-semibold">Inbox</h2>
+              <LuMailbox className="text-gray-600 text-2xl" />
+            </div>
+          </div>
         </div>
       </div>
+
+
+      {/* Dialog to show after quiz ends*/}
+      <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-md border-0 shadow-2xl">
+        <DialogHeader className="text-center space-y-2 pb-1">
+          <div className="mx-auto w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center mb-1">
+            <CheckCircle className="w-6 h-6 text-white" />
+          </div>
+          <DialogTitle className="text-xl font-bold text-gray-900 leading-tight">Quiz Complete!</DialogTitle>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Congratulations on completing your personalized assessment. Your career journey starts now.
+          </p>
+        </DialogHeader>
+
+        <div className="space-y-3 py-4">
+          <h3 className="font-semibold text-gray-900 text-base mb-3">What&apos;s next for you:</h3>
+
+          <div className="space-y-2">
+            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
+              <div className="w-7 h-7 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Sparkles className="w-3.5 h-3.5 text-white" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Personalized Career Suggestions</p>
+                <p className="text-gray-600 text-xs mt-0.5">Discover roles tailored to your skills and interests</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
+              <div className="w-7 h-7 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Map className="w-3.5 h-3.5 text-white" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 text-sm">AI-Powered Roadmap</p>
+                <p className="text-gray-600 text-xs mt-0.5">Get a step-by-step plan to reach your goals</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100">
+              <div className="w-7 h-7 bg-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Users className="w-3.5 h-3.5 text-white" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900 text-sm">Personal Career Coach</p>
+                <p className="text-gray-600 text-xs mt-0.5">Expert guidance throughout your journey</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-3">
+          <Button
+            onClick={handleClose}
+            className="w-full h-10 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+          >
+            Start My Career Journey
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
     </section>
   );
 }
