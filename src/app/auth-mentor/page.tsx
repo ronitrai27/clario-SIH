@@ -28,49 +28,7 @@ export default function AuthPage() {
   const [isSignup, setIsSignup] = useState<boolean>(false);
   const supabase = createClient();
 
-  // async function HandleAuth() {
-  //   setLoading(true);
-  //   setError("");
-  //   try {
-  //     if (isSignup) {
-  //       // signup functionality
-  //       const { data, error } = await supabase.auth.signUp({
-  //         email,
-  //         password,
-  //         options: {
-  //           data: { role: "mentor" },
-  //           emailRedirectTo: `${window.location.origin}/email-verified`,
-  //           captchaToken: token || undefined,
-  //         },
-  //       });
 
-  //       if (error) throw error;
-  //       // for email verification
-  //       if (data.user && !data.session) {
-  //         setError("Please check your email for verification link");
-  //         return;
-  //       }
-  //     } else {
-  //       // login functionality
-  //       const { data, error } = await supabase.auth.signInWithPassword({
-  //         email,
-  //         password,
-  //         options: {
-  //           captchaToken: token || undefined,
-  //         },
-  //       });
-
-  //       if (error) throw error;
-  //       if (data.session) {
-  //         router.push("/auth-mentor/callback");
-  //       }
-  //     }
-  //   } catch (err: any) {
-  //     setError(err.error_description || err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
 
   async function HandleAuth() {
     setLoading(true);

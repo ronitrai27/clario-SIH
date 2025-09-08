@@ -41,3 +41,13 @@ export type UserQuizData =  {
   user_current_status: string; 
   user_mainFocus: string; 
 }
+
+export type UserCalendarEvent = {
+  id: string;
+  user_id: string;
+  title: string;
+  start: Date; // mapped from start_time
+  end: Date;   // mapped from end_time
+  created_at?: string;
+  updated_at?: string;
+};

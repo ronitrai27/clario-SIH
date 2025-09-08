@@ -143,16 +143,20 @@ export function AppSidebar() {
                 </p>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            {/* MESSAGES */}
-            <SidebarMenuItem className="">
-              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
-                <Link href="/home/calendar" className="w-full">
-                  <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                    <LuCalendar className="text-xl" />
-                    Calendar
-                  </p>
-                </Link>
-              </SidebarMenuButton>
+            {/* CALENDAR */}
+            <SidebarMenuItem
+              className={`flex cursor-pointer hover:scale-105 duration-200 ease-in-out rounded px-2 py-1    ${
+                pathname === "/home/calendar"
+                  ? "bg-blue-400 scale-105 hover:bg-white/10"
+                  : "hover:bg-white/10 hover:scale-105"
+              }`}
+            >
+              <Link href="/home/calendar" className="w-full">
+                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
+                  <LuCalendar className="text-xl" />
+                  Calendar
+                </p>
+              </Link>
             </SidebarMenuItem>
             {/* COMMUNITY */}
             <SidebarMenuItem className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded py-1 px-2">
