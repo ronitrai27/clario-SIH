@@ -55,7 +55,7 @@ import { createClient } from "@/lib/supabase/client";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Sparkle } from "lucide-react";
+import { Sparkle, Stars } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -64,6 +64,7 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import Link from "next/link";
+import { useAssistantSheetStore } from "@/lib/store/useAssistantSheet"
 
 export function AppSidebar() {
   const { user, loading } = useUserData();
@@ -306,8 +307,8 @@ export function AppSidebar() {
                   className="justify-between w-full font-roboto hover:bg-gray-50 rounded-none cursor-pointer"
                 >
                   <div className="flex gap-2 items-center">
-                    <LuSun className="text-[18px]" />
-                    Theme
+                    <Stars className="text-[18px]" />
+                    Ai Assistant
                   </div>
                   <kbd className="text-xs text-muted-foreground bg-muted px-1 py-0.5 rounded">
                     Ctrl+Alt+D
