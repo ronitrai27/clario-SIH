@@ -35,8 +35,22 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { DBUser } from "@/lib/types/allTypes";
 import ActionBox from "../_components/ActionBox";
-import { CheckCircle, Ghost, Map, PlusCircle, Sparkles, Users } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  CheckCircle,
+  Ghost,
+  Map,
+  PlusCircle,
+  Sparkles,
+  Users,
+} from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const fallbackAvatars = [
   "/a1.png",
@@ -98,7 +112,7 @@ export default function HomePage() {
 
   const handleClose = () => {
     setOpen(false);
-    localStorage.removeItem("quizDone"); 
+    localStorage.removeItem("quizDone");
   };
 
   const avatarBgColors = [
@@ -288,7 +302,7 @@ export default function HomePage() {
               </TabsList>
               <div className="flex-1 mt-4 overflow-y-auto">
                 <TabsContent value="messages" className="h-full">
-                  <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                  <div className="flex flex-col items-center justify-center -mt-20 h-full text-gray-500">
                     <Ghost className="" size={50} />
                     <p className="text-base font-inter mt-3">
                       No messages yet...
@@ -345,70 +359,89 @@ export default function HomePage() {
               <h2 className="text-base font-inter font-semibold">Inbox</h2>
               <LuMailbox className="text-gray-600 text-2xl" />
             </div>
+
+            <div className="mt-4 h-full items-center justify-center flex flex-col">
+              <LuMailbox className="text-gray-600 text-4xl" />
+              <p className="text-lg font-sora">No messages yet..</p>
+            </div>
           </div>
         </div>
       </div>
 
-
       {/* Dialog to show after quiz ends*/}
       <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-md border-0 shadow-2xl">
-        <DialogHeader className="text-center space-y-2 pb-1">
-          <div className="mx-auto w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-1">
-            <CheckCircle className="w-6 h-6 text-white" />
+        <DialogContent className="sm:max-w-md border-0 shadow-2xl">
+          <DialogHeader className="text-center space-y-2 pb-1">
+            <div className="mx-auto w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-1">
+              <CheckCircle className="w-6 h-6 text-white" />
+            </div>
+            {/* <DialogTitle className="text-xl font-bold text-gray-900 leading-tight">Quiz Complete!</DialogTitle> */}
+            <p className="text-gray-600 text-base leading-relaxed text-center font-inter">
+              Congratulations on completing your personalized assessment. Your
+              career journey starts now.
+            </p>
+          </DialogHeader>
+
+          <div className="space-y-3 py-4">
+            <h3 className="font-semibold text-gray-800 font-inter text-base mb-3">
+              What&apos;s next for you:
+            </h3>
+
+            <div className="space-y-3">
+              <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
+                <div className="w-7 h-7 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 text-sm">
+                    Personalized Career Suggestions
+                  </p>
+                  <p className="text-gray-600 text-xs mt-0.5 font-inter">
+                    Discover roles tailored to your skills and interests
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
+                <div className="w-7 h-7 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Map className="w-3.5 h-3.5 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 text-sm">
+                    AI-Powered Roadmap
+                  </p>
+                  <p className="text-gray-600 text-xs mt-0.5 font-inter">
+                    Get a step-by-step plan to reach your goals
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100">
+                <div className="w-7 h-7 bg-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Users className="w-3.5 h-3.5 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 text-sm">
+                    Personal Career Coach
+                  </p>
+                  <p className="text-gray-600 text-xs mt-0.5 font-inter">
+                    Expert guidance throughout your journey
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          {/* <DialogTitle className="text-xl font-bold text-gray-900 leading-tight">Quiz Complete!</DialogTitle> */}
-          <p className="text-gray-600 text-base leading-relaxed text-center font-inter">
-            Congratulations on completing your personalized assessment. Your career journey starts now.
-          </p>
-        </DialogHeader>
 
-        <div className="space-y-3 py-4">
-          <h3 className="font-semibold text-gray-800 font-inter text-base mb-3">What&apos;s next for you:</h3>
-
-          <div className="space-y-3">
-            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
-              <div className="w-7 h-7 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Sparkles className="w-3.5 h-3.5 text-white" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900 text-sm">Personalized Career Suggestions</p>
-                <p className="text-gray-600 text-xs mt-0.5 font-inter">Discover roles tailored to your skills and interests</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-purple-50 to-violet-50 border border-purple-100">
-              <div className="w-7 h-7 bg-purple-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Map className="w-3.5 h-3.5 text-white" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900 text-sm">AI-Powered Roadmap</p>
-                <p className="text-gray-600 text-xs mt-0.5 font-inter">Get a step-by-step plan to reach your goals</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100">
-              <div className="w-7 h-7 bg-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Users className="w-3.5 h-3.5 text-white" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900 text-sm">Personal Career Coach</p>
-                <p className="text-gray-600 text-xs mt-0.5 font-inter">Expert guidance throughout your journey</p>
-              </div>
-            </div>
+          <div className="pt-3">
+            <Button
+              onClick={handleClose}
+              className="w-full h-10 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+            >
+              Start My Career Journey
+            </Button>
           </div>
-        </div>
-
-        <div className="pt-3">
-          <Button
-            onClick={handleClose}
-            className="w-full h-10 bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            Start My Career Journey
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

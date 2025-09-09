@@ -110,8 +110,7 @@ const CareerCoach = () => {
                   </div>
                 </div>
                 <p className="mt-4 max-w-[250px] mx-auto text-center font-inter text-gray-200 text-sm ">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-                  tempore.
+                    Talk naturally with your AI companion and get instant responses anytime.
                 </p>
               </div>
               {/* 2 */}
@@ -125,8 +124,7 @@ const CareerCoach = () => {
                   </div>
                 </div>
                 <p className="mt-4 max-w-[250px] mx-auto text-center font-inter text-gray-600 text-sm ">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-                  tempore blanditiis.
+                    Ask questions freely and get simple, accurate explanations in seconds.
                 </p>
               </div>
               {/* 3 */}
@@ -140,8 +138,7 @@ const CareerCoach = () => {
                   </div>
                 </div>
                 <p className="mt-4 max-w-[250px] mx-auto text-center font-inter text-gray-600 text-sm ">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-                  tempore blandit.
+                    Always get real-time and  latest, verified answers.
                 </p>
               </div>
             </div>

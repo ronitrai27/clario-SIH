@@ -53,6 +53,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { clearMentorCache } from "@/lib/functions/dbActions";
 
 export default function Navbar() {
   const { user, loading } = useUserData();
@@ -64,6 +65,11 @@ export default function Navbar() {
   async function signOut() {
     setSignoutLoading(true);
     try {
+      // clear cache if user has mainFocus
+      if (user?.mainFocus) {
+        await clearMentorCache(user.mainFocus);
+      }
+
       await supabase.auth.signOut();
       toast.success("Signed out successfully");
       router.push("/auth");
@@ -198,21 +204,24 @@ export default function Navbar() {
                       <AlertDialogCancel className="font-inter cursor-pointer">
                         Cancel
                       </AlertDialogCancel>
-                      <AlertDialogAction
-                        className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
-                        onClick={signOut}
-                      >
-                        {signoutLoading ? (
-                          <>
-                            <LuLoader className="animate-spin mr-2 inline" />
-                            <span>Signing Out..</span>
-                          </>
-                        ) : (
-                          <>
-                            <LuLogOut className="mr-2 inline" />
-                            <span>Logout</span>
-                          </>
-                        )}
+                      <AlertDialogAction asChild>
+                        <Button
+                          disabled={signoutLoading}
+                          className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
+                          onClick={signOut}
+                        >
+                          {signoutLoading ? (
+                            <>
+                              <LuLoader className="animate-spin mr-2 inline" />
+                              <span>Signing Out..</span>
+                            </>
+                          ) : (
+                            <>
+                              <LuLogOut className="mr-2 inline" />
+                              <span>Logout</span>
+                            </>
+                          )}
+                        </Button>
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>

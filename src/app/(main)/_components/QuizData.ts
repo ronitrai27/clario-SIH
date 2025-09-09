@@ -1,74 +1,11 @@
 export const quizData = {
   "12": {
     "12th student": {
-      "crack competitive exams": {
-        focus_specific: [
-          {
-            question: "Which stream are you in?",
-            options: ["Medical", "Non-medical", "Commerce", "Arts"],
-          },
-          {
-            question: "Which competitive exam are you preparing for?",
-            options: ["JEE", "NEET", "CA", "CLAT", "Others"],
-          },
-          {
-            question: "How confident are you about this exam?",
-            options: ["Very confident", "Neutral", "Unsure"],
-          },
-          {
-            question: "What is your preparation timeline?",
-            options: [
-              "Just started",
-              "Less than 3 months",
-              "Less than 6 months",
-              "More than 6 months",
-            ],
-          },
-          {
-            question: "What subjects do you find most challenging?",
-          },
-        ],
-        learning_style: [
-          {
-            question: "How fast do you usually learn new concepts?",
-            options: ["Fast", "Average", "Slow"],
-          },
-          {
-            question: "What type of content helps you learn best?",
-            options: [
-              "Visual (diagrams)",
-              "Reading (textual)",
-              "Short summaries / key points",
-            ],
-          },
-        ],
-
-        deep_understanding: [
-          {
-            question: "What is your biggest challenge in exam preparation?",
-            options: [
-              "Time management",
-              "Consistency",
-              "Subject clarity",
-              "Stress",
-            ],
-          },
-          {
-            question: "What motivates you the most to crack this exam?",
-            options: [
-              "Passion",
-              "Career opportunities",
-              "Family expectations",
-              "Social impact",
-            ],
-          },
-        ],
-      },
       "choose career paths": {
         focus_specific: [
           {
             question: "Which stream are you in?",
-            options: ["Medical", "Non-medical", "Commerce", "Arts"],
+            options: ["Medical", "Science", "Commerce", "Arts"],
           },
           {
             question: "How confident are you in your chosen stream?",
@@ -125,7 +62,7 @@ export const quizData = {
         focus_specific: [
            {
             question: "Which stream are you in?",
-            options: ["Medical", "Non-medical", "Commerce", "Arts"],
+            options: ["Medical", "Science", "Commerce", "Arts"],
           },
           {
             question: "Which skills are you most interested in building?",
@@ -180,7 +117,7 @@ export const quizData = {
         focus_specific: [
           {
             question: "In Which Stream are you most interested in?",
-            options: ["Medical", "Commerce", "Arts", "Non-Medical"],
+            options: ["Medical", "Commerce", "Arts", "Science"],
           },
           {
             question: "How confident are you in your chosen subjects?",
@@ -218,68 +155,6 @@ export const quizData = {
               "Passion",
               "Work-life balance",
               "High income",
-            ],
-          },
-        ],
-      },
-      "board exam excellence": {
-        focus_specific: [
-          {
-            question: "Which board are you studying under?",
-            options: ["CBSE", "ICSE", "State", "Others"],
-          },
-          {
-            question: "Which subjects do you feel strongest in?",
-          },
-          {
-            question: "Which subjects do you find most difficult?",
-          },
-          {
-            question:
-              "How confident are you in your exam preparation right now?",
-            options: ["Very confident", "Somewhat confident", "Not confident"],
-          },
-        ],
-        learning_style: [
-          {
-            question: "How fast do you revise and retain topics?",
-            options: ["Very fast", "Average", "Takes time"],
-          },
-          {
-            question: "What study methods work best for you?",
-            options: [
-              "Practice tests",
-              "Group study",
-              "Notes",
-              "Videos",
-              "Coaching",
-            ],
-          },
-        ],
-        support_type: [
-          {
-            question: "Do you get study support from family/teachers?",
-            options: ["Yes", "No", "Sometimes"],
-          },
-          {
-            question: "Do you have access to coaching or extra classes?",
-            options: ["Yes", "No"],
-          },
-          {
-            question: "How much time daily can you dedicate to studies?",
-          },
-        ],
-        deep_understanding: [
-          {
-            question: "What's your biggest struggle with exam preparation?",
-            options: ["Time management", "Motivation", "Subject understanding"],
-          },
-          {
-            question: "What motivates you to perform well in board exams?",
-            options: [
-              "Future career",
-              "Family expectations",
-              "Personal satisfaction",
             ],
           },
         ],

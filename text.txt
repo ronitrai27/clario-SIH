@@ -6,3 +6,7 @@ Static links -  const link = `${window.location.origin}/invite/${user.invite_lin
 if (user.user_metadata.role !== "mentor") {
   router.push("/unauthorized");
 }
+
+
+## Cached -
+recomeneded 6 mentors in home , user quiz career/skill suggestion.

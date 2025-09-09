@@ -3,8 +3,8 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/client";
-import { DBUser, DBMentor, UserQuizData } from "../types/allTypes"; 
-
+import { DBUser, DBMentor, UserQuizData } from "../types/allTypes";
+import { redis } from "@/lib/redis";
 
 const expertiseGroups: Record<string, string[]> = {
   "career/ path guidance": [
@@ -30,6 +30,22 @@ export async function getMatchingMentors(
   const supabase = createClient();
 
   const focus = userMainFocus.toLowerCase().trim();
+  const cacheKey = `mentors:${focus}`; // create a unique key based on the focus
+
+  const cachedMentors = await redis.get(cacheKey);
+
+  if (cachedMentors) {
+    console.log(`---- Mentors HIT from Redis for key---: ${cacheKey}`);
+    // Ensure cachedMentors is an array
+    if (Array.isArray(cachedMentors)) {
+      return cachedMentors as DBMentor[];
+    }
+    console.warn(
+      `Invalid cache data for key: ${cacheKey}, fetching from Supabase`
+    );
+  } else {
+    console.log(`Cache miss for key: ${cacheKey}, querying Supabase`);
+  }
 
   let query = supabase.from("mentors").select("*");
 
@@ -37,7 +53,6 @@ export async function getMatchingMentors(
     query = query.order("created_at", { ascending: false }).limit(6);
   } else {
     const validFocuses = expertiseGroups[focus] || [focus];
-
     query = query.overlaps("expertise", validFocuses).limit(6);
   }
 
@@ -48,10 +63,19 @@ export async function getMatchingMentors(
     return [];
   }
 
+  //  10-minute TTL (600 seconds)
+  if (data && data.length > 0) {
+    await redis.set(cacheKey, JSON.stringify(data), { ex: 600 });
+    console.log("Mentors fetched db, cached in redis");
+  }
+
   return data || [];
 }
 
-export async function getRandomUsersByInstitution(institutionName: string, currentUserId: number): Promise<DBUser[]> {
+export async function getRandomUsersByInstitution(
+  institutionName: string,
+  currentUserId: number
+): Promise<DBUser[]> {
   const supabase = createClient();
 
   // fetch users from same institution
@@ -59,8 +83,8 @@ export async function getRandomUsersByInstitution(institutionName: string, curre
     .from("users")
     .select("*")
     .eq("institutionName", institutionName)
-    .neq("id", currentUserId) 
-    .limit(10); 
+    .neq("id", currentUserId)
+    .limit(10);
 
   if (error) {
     console.error("Error fetching users:", error.message);
@@ -76,16 +100,47 @@ export async function getRandomUsersByInstitution(institutionName: string, curre
 
 export async function getUserQuizData(userId: any): Promise<UserQuizData[]> {
   const supabase = createClient();
+  const cacheKey = `quizdata:${userId}`; // create a unique key based on the user ID
 
-  const { data, error } = await supabase
-    .from("userQuizData")
-    .select("*")
-    .eq("userId", userId);
+  try {
+    const cached = await redis.get<UserQuizData[]>(cacheKey);
+    if (cached) {
+      console.log(`✅ Quiz data Hit in Redis for user: ${userId}`);
+      return cached;
+    }
 
-  if (error) {
-    console.error("Error fetching quiz data:", error);
+    console.log(`❌ Cache miss for user: ${userId}, querying Supabase...`);
+
+    const { data, error } = await supabase
+      .from("userQuizData")
+      .select("*")
+      .eq("userId", userId);
+
+    if (error) {
+      console.error("Error fetching quiz data:", error);
+      return [];
+    }
+
+    const quizData = (data || []) as UserQuizData[];
+
+    if (quizData.length > 0) {
+      await redis.set(cacheKey, quizData, { ex: 600 });
+      console.log(`✅ Quiz data cached in Redis for user: ${userId}`);
+    }
+
+    return quizData;
+  } catch (err) {
+    console.error(`Redis/Supabase error for user ${userId}:`, err);
     return [];
   }
+}
 
-  return data as UserQuizData[];
+export async function clearMentorCache(focus: string) {
+  const cacheKey = `mentors:${focus.toLowerCase().trim()}`;
+  try {
+    await redis.del(cacheKey);
+    console.log(`✅ Redis cache cleared for key: ${cacheKey}`);
+  } catch (error) {
+    console.error(`❌ Failed to clear Redis cache for key: ${cacheKey}`, error);
+  }
 }
