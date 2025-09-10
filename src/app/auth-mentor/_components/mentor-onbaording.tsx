@@ -71,13 +71,12 @@ const OCCUPATIONS = [
 
 const EXPERTISE_OPTIONS = [
   "Career/ Path guidance",
-  "Board exam excellence",
   "Skill building",
   "Crack competitive exams",
   "Choose career paths",
   "Counseling & guidance",
   "Job placement",
-  "Internship looking",
+  "Job/Internship opportunities",
   "Higher studies",
   "Research opportunities",
 ] as const;

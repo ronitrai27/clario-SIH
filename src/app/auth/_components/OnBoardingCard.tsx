@@ -66,13 +66,11 @@ const FOCUS_BY_PROFESSION: Record<Profession, string[]> = {
   ],
   Diploma: [
     "Job/Internship opportunities",
-    // "Internship looking",
     "Career/ Path guidance",
     "Skill building",
   ],
   "Graduate": [
     "Job/Internship opportunities",
-    // "Internship looking",
     "Career/ Path guidance",
   ],
   "Postgraduate": [

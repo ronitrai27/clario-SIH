@@ -64,7 +64,7 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible";
 import Link from "next/link";
-import { useAssistantSheetStore } from "@/lib/store/useAssistantSheet";
+import { useAssistantSheetStore } from "@/lib/store/useAssistantSheet"
 import { LuChartNoAxesColumn } from "react-icons/lu";
 
 export function AppSidebar() {
@@ -109,126 +109,10 @@ export function AppSidebar() {
         <Separator className="mt-1 mb-2 " />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu className="p-2 space-y-2.5">
-            {/* HOME */}
-            <SidebarMenuItem
-              className={`flex cursor-pointer duration-200 ease-in-out rounded py-1 px-3
-            ${
-              pathname === "/home"
-                ? "bg-blue-400 scale-105 hover:bg-white/10"
-                : "hover:bg-white/10 hover:scale-105"
-            }`}
-            >
-              <Link href="/home" className="w-full">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuLayoutDashboard className="text-xl" />
-                  Home
-                </p>
-              </Link>
-            </SidebarMenuItem>
-            {/* Mentor Connect */}
-            <SidebarMenuItem
-              className={`flex cursor-pointer hover:scale-105 duration-200 ease-in-out rounded px-2 py-1  ${
-                pathname === "/home/mentor-connect"
-                  ? "bg-blue-400 scale-105 hover:bg-white/10"
-                  : "hover:bg-white/10 hover:scale-105"
-              }`}
-            >
-              <Link href="/home/mentor-connect" className="w-full">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuUsers className="text-xl" />
-                  Mentor Connect
-                </p>
-              </Link>
-            </SidebarMenuItem>
-            {/* Career board */}
-            <SidebarMenuItem className="">
-              <SidebarMenuButton className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded ">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuChartNoAxesColumn className="text-xl" />
-                  Career Board
-                </p>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            {/* CALENDAR */}
-            <SidebarMenuItem
-              className={`flex cursor-pointer hover:scale-105 duration-200 ease-in-out rounded px-2 py-1    ${
-                pathname === "/home/calendar"
-                  ? "bg-blue-400 scale-105 hover:bg-white/10"
-                  : "hover:bg-white/10 hover:scale-105"
-              }`}
-            >
-              <Link href="/home/calendar" className="w-full">
-                <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                  <LuCalendar className="text-xl" />
-                  Calendar
-                </p>
-              </Link>
-            </SidebarMenuItem>
-            {/* COMMUNITY */}
-            <SidebarMenuItem className="flex hover:bg-white/10 cursor-pointer hover:scale-105 duration-200 ease-in-out rounded py-1 px-2">
-              <p className="flex items-center gap-3 font-medium font-inter text-base text-white tracking-wide">
-                <LuMessageSquare className="text-xl" />
-                Messages
-              </p>
-            </SidebarMenuItem>
-            {/* AI TOOLS COLLAPSIBLE */}
-            <Collapsible className="mt-2" defaultOpen={true}>
-              <CollapsibleTrigger asChild className="">
-                <SidebarMenuButton className="w-full flex items-center justify-between hover:bg-white/10 cursor-pointer text-white hover:text-black group">
-                  <p className="flex items-center gap-3 font-medium font-inter text-base ">
-                    <LuBrain className="text-xl" /> AI Tools
-                  </p>
-                  <LuChevronDown className="text-xl group-hover:text-black " />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub className="pl-2 mt-3 space-y-2">
-                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
-                    AI Career Coach
-                  </SidebarMenuSubItem>
-                  <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
-                    AI Roadmap
-                  </SidebarMenuSubItem>
-                  {user?.current_status !== "10th student" &&
-                    user?.current_status !== "12th student" && (
-                      <SidebarMenuSubItem className="font-inter font-medium text-gray-200 cursor-pointer text-base hover:text-white hover:translate-x-2 duration-200">
-                        AI Resume Analyser
-                      </SidebarMenuSubItem>
-                    )}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenu>
-        </SidebarGroup>
+       
       </SidebarContent>
       <SidebarFooter className="px-1 overflow-hidden">
-        <div className="mb-4 bg-gradient-to-br from-white via-blue-200 to-blue-400 w-[96%] mx-auto h-[120px] rounded-lg px-2 py-3">
-          <div className="flex items-center gap-3">
-            <LuWallet className="text-2xl text-blue-600" />
-
-            <h2 className="font-raleway font-semibold text-base">Credits</h2>
-          </div>
-          <div className="flex  justify-between">
-            <div className="flex flex-col items-center justify-start mt-2">
-              <p className="text-center font-sora font-bold text-2xl tracking-tight">
-                {user?.remainingCredits}
-              </p>
-
-              <button className="text-xs tracking-tight font-inter cursor-pointer text-blue-600 bg-gray-100/40 hover:bg-gray-100/70  px-2 rounded-sm flex items-center gap-2 mt-3">
-                Top Up <Sparkle className="" size={20} />
-              </button>
-            </div>
-            <Image
-              src="/card2.png"
-              alt="logo"
-              width={90}
-              height={90}
-              className="object-contain -mt-4 -rotate-12"
-            />
-          </div>
-        </div>
+       
         {loading ? (
           <div></div>
         ) : (

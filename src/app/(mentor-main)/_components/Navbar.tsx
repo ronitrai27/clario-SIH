@@ -2,7 +2,6 @@
 
 import { useUserData } from "@/context/UserDataProvider";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import AnimatedAssistant from "./animated-assistant";
 import { Input } from "@/components/ui/input";
 import {
   LuArrowBigUp,
@@ -37,7 +36,6 @@ import {
 import { LuMessageSquareMore } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { LuWallet } from "react-icons/lu";
-import SearchBar from "./SearchBar";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -56,28 +54,13 @@ import { toast } from "sonner";
 import { clearMentorCache } from "@/lib/functions/dbActions";
 
 export default function Navbar() {
-  const { user, loading } = useUserData();
+  const { mentor, loading } = useUserData();
 
   const supabase = createClient();
   const router = useRouter();
   const [signoutLoading, setSignoutLoading] = useState(false);
 
-  async function signOut() {
-    setSignoutLoading(true);
-    try {
-      if (user?.mainFocus) {
-        await clearMentorCache(user.mainFocus);
-      }
 
-      await supabase.auth.signOut();
-      toast.success("Signed out successfully");
-      router.push("/auth");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    } finally {
-      setSignoutLoading(false);
-    }
-  }
 
   return (
     <div className="bg-gray-50 pt-3 pb-1 px-4 pr-8 flex items-center gap-10 justify-between ">
@@ -85,9 +68,6 @@ export default function Navbar() {
         <SidebarTrigger />
       </div>
 
-      <AnimatedAssistant />
-
-      <SearchBar />
 
       <div className="flex items-center gap-14">
         <div className="">
@@ -113,7 +93,7 @@ export default function Navbar() {
             ) : (
               <div className="">
                 <Image
-                  src={user?.avatar || "/user.png"}
+                  src={mentor?.avatar || "/user.png"}
                   alt="User Avatar"
                   width={52}
                   height={52}
@@ -131,7 +111,7 @@ export default function Navbar() {
               {/* Profile Section */}
               <DropdownMenuLabel className="flex items-center gap-5 px-3 py-2 bg-gradient-to-br from-blue-200 to-sky-100">
                 <Image
-                  src={user?.avatar || "/a1.png"}
+                  src={mentor?.avatar || "/user.png"}
                   alt="User Avatar"
                   width={36}
                   height={36}
@@ -139,10 +119,10 @@ export default function Navbar() {
                 />
                 <div className="flex flex-col justify-end">
                   <p className="font-inter font-medium text-base">
-                    {user?.userName}
+                    {mentor?.full_name}
                   </p>
-                  <p className="text-sm font-medium text-muted-foreground cursor-pointer">
-                    Upgrade now <LuArrowUpRight className="inline" />
+                  <p className="text-sm font-medium text-muted-foreground cursor-pointer max-w-[150px] truncate">
+                  {mentor?.email}
                   </p>
                 </div>
               </DropdownMenuLabel>
@@ -159,9 +139,9 @@ export default function Navbar() {
                   </span>
                 </p>
 
-                <span className="font-semibold text-sm font-inter text-yellow-500 ">
+                {/* <span className="font-semibold text-sm font-inter text-yellow-500 ">
                   {user?.remainingCredits} / {user?.totalCredits}
-                </span>
+                </span> */}
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer flex gap-3 px-3 py-2 hover:bg-blue-50">
                 <LuUser className="h-6 w-6 text-black" />
@@ -207,7 +187,7 @@ export default function Navbar() {
                         <Button
                           disabled={signoutLoading}
                           className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
-                          onClick={signOut}
+                          // onClick={signOut}
                         >
                           {signoutLoading ? (
                             <>

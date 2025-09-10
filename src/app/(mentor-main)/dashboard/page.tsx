@@ -5,11 +5,14 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useUserData } from "@/context/UserDataProvider";
 import Link from "next/link";
-
 const Dashbaord = () => {
   const supabase = createClient();
   const router = useRouter();
-  const { mentor, loading } = useUserData();
+  const { mentor, loading, ensureUserInDB } = useUserData();
+
+  useEffect(() => {
+    ensureUserInDB();
+  }, []);
 
   async function signOut() {
     try {
@@ -20,7 +23,6 @@ const Dashbaord = () => {
     }
   }
 
-
   return (
     <div>
       hello
@@ -29,8 +31,6 @@ const Dashbaord = () => {
         {loading && "Loading..."}
         <p>{mentor?.full_name}</p>
         <p>{mentor?.email}</p>
-
-
         <Link href="/test-mentor">test</Link>
       </div>
     </div>
