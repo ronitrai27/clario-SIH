@@ -68,7 +68,7 @@ export default function HomePage() {
       />
       <main className="z-50 relative flex flex-col items-center justify-center w-full h-full">
         <div className="flex items-center">
-          <Image src="/clarioBlack.png" alt="logo" width={80} height={80} />
+          <Image src="/clarioBlack.png" alt="logo" width={80} height={80} priority/>
           <h1 className="font-raleway text-3xl font-bold ml-2">Clario</h1>
         </div>
 

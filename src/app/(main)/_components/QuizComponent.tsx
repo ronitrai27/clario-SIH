@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { quizData, QuizSection } from "./QuizData";
 import { useUserData } from "@/context/UserDataProvider";
 import { Progress } from "@/components/ui/progress";
@@ -12,17 +12,30 @@ import {
   LuArrowBigRight,
   LuArrowLeft,
   LuArrowRight,
+  LuCheck,
   LuLoader,
 } from "react-icons/lu";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import InsightsReveal from "./CardQuizInsights";
 
 export default function Quiz() {
   const { user } = useUserData();
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [finalLoading, setFinalLoading] = useState(false);
+
+  const [insights, setInsights] = useState<any>(null);
+  const [readyToSave, setReadyToSave] = useState(false); // to display insights
 
   const current_status = user?.current_status;
   const mainFocus = user?.mainFocus;
@@ -101,43 +114,56 @@ export default function Quiz() {
       });
 
       const { data } = res.data;
-      // console.log("Career Insights: from LLM ", data);
+      setInsights(data.insights);
+      setFinished(false);
+      setReadyToSave(true);
+      toast.success("Quiz submitted successfully!");
+    } catch (err: any) {
+      console.error("❌ handleSubmit error:", err.message || err);
+      toast.error(err.message || "Failed to submit quiz. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleConfirm = async () => {
+    if (!insights) return;
+    setFinalLoading(true);
+    try {
       const { error } = await supabase.from("userQuizData").insert([
         {
           userId: user.id,
           user_current_status: user.current_status,
           user_mainFocus: user.mainFocus,
-          quizInfo: data.insights, // JSONB
+          quizInfo: insights, // JSONB
         },
       ]);
 
       if (error) {
         console.error("Supabase insert error:", error);
         toast.error("Failed to save quiz data. Please try again.");
-      } else {
-        console.log("Quiz + Insights saved successfully!");
-        const { error: updateError } = await supabase
-          .from("users")
-          .update({ isQuizDone: true })
-          .eq("id", user.id);
-
-        if (updateError) {
-          console.error("Supabase update error:", updateError);
-          toast.error("Failed to update user status.");
-          return;
-        }
-
-        localStorage.setItem("quizDone", "true");
-
-        toast.success("Quiz submitted successfully!");
-
-        router.push("/home");
+        return;
       }
+
+      const { error: updateError } = await supabase
+        .from("users")
+        .update({ isQuizDone: true })
+        .eq("id", user.id);
+
+      if (updateError) {
+        console.error("Supabase update error:", updateError);
+        toast.error("Failed to update user status.");
+        return;
+      }
+
+      localStorage.setItem("quizDone", "true");
+      toast.success("Quiz submitted successfully!");
+      router.push("/home");
     } catch (err: any) {
-      console.error("❌ handleSubmit error:", err.message || err);
-      toast.error(err.message || "Failed to submit quiz. Please try again.");
+      console.error("❌ handleConfirm error:", err.message || err);
+      toast.error("Failed to save quiz results.");
     } finally {
-      setLoading(false);
+      setFinalLoading(false);
     }
   };
 
@@ -177,8 +203,8 @@ export default function Quiz() {
         </div>
 
         {loading && (
-          <p className="text-gray-500 text-lg mt-8 font-inter text-center flex items-center gap-2 justify-center">
-            <LuLoader className="animate-spin mr-2" />
+          <p className="text-gray-800 text-lg mt-10 font-inter text-center flex items-center gap-2 justify-center">
+            <LuLoader className="animate-spin mr-2 text-2xl" />
             Analyzing Response...
           </p>
         )}
@@ -217,6 +243,41 @@ export default function Quiz() {
           Start Quiz <LuArrowBigRight className="inline ml-2" />
         </Button>
       </div>
+    );
+  }
+
+  if (readyToSave) {
+    return (
+      <Card className="shadow-md border border-gray-200 w-[680px] mx-auto p-3">
+        <CardHeader>
+          <CardTitle className="text-center text-xl font-sora">
+            AI Career Insights
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="">
+          <InsightsReveal insights={insights} />
+        </CardContent>
+        <CardFooter>
+          {/* 🔹 Confirm Button */}
+          <Button
+            onClick={handleConfirm}
+            disabled={finalLoading}
+            className="w-full"
+          >
+            {finalLoading ? (
+              <>
+                <LuLoader className="animate-spin mr-2 inline" /> Loading...
+              </>
+            ) : (
+              <>
+              Confirm & Continue
+              </>
+             
+            )}
+      
+          </Button>
+        </CardFooter>
+      </Card>
     );
   }
 

@@ -26,6 +26,7 @@ import {
   List,
   Star,
 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const fallbackAvatars = [
   "/a1.png",
@@ -66,12 +67,26 @@ export default function MentorConnect() {
   useEffect(() => {
     loadMentors(1);
   }, []);
-  const bgColors = [
-    "bg-gradient-to-br from-white to-indigo-200",
-    "bg-gradient-to-br from-white to-blue-200",
-    "bg-gradient-to-br from-yellow-50 to-yellow-200",
-    "bg-gradient-to-br from-green-50 to-green-200",
+  const borderColors = [
+    "border-blue-500",
+    "border-green-500",
+    "border-yellow-500",
+    "border-pink-500",
   ];
+    const bgColors = [
+    "bg-white",
+    "bg-white",
+    "bg-white",
+    "bg-white",
+  ];
+
+  function getRandomBorderColor(id: string) {
+    const index = id
+      ? id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) %
+        borderColors.length
+      : Math.floor(Math.random() * borderColors.length);
+    return borderColors[index];
+  }
   function getRandomBgColor(id: string) {
     const index = id
       ? id.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) %
@@ -89,7 +104,7 @@ export default function MentorConnect() {
   //   console.log("Mentors", mentorData);
 
   return (
-    <div className="bg-gray-50 py-6 px-4 h-full w-[calc(100vw-232px)]">
+    <div className="bg-gray-50 py-6 px-4 h-full w-full">
       <div className="flex flex-col space-y-4">
         <SingleCard />
 
@@ -98,7 +113,7 @@ export default function MentorConnect() {
         </h2>
 
         {/* Scrollable Skeleton Row */}
-        <div className="w-full px-6">
+        <div className="w-full max-w-[1150px] mx-auto px-6">
           <div className="flex space-x-6 overflow-x-auto px-2 scrollbar-hide max-w-full">
             {[...Array(5)].map((_, i) => (
               <Skeleton
@@ -151,13 +166,14 @@ export default function MentorConnect() {
         </div>
 
         {/* ALL mentors */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5  gap-x-6 gap-y-14 px-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5  gap-x-6 gap-y-14 px-2 max-w-[1260px] mx-auto">
           {mentorData.map((mentor) => {
             const bgColor = getRandomBgColor(mentor.id);
+            const borderColor = getRandomBorderColor(mentor.id);
             return (
               <div
                 key={mentor.id}
-                className="border rounded-xl shadow-sm bg-white hover:shadow-md transition-shadow duration-200 overflow-hidden h-[240px]"
+                className={`border-l-4 ${borderColor} rounded-xl shadow-sm bg-white hover:shadow-md transition-shadow duration-200 overflow-hidden h-[240px]`}
               >
                 <div className="flex h-full">
                   {/* Left Section */}
@@ -171,7 +187,6 @@ export default function MentorConnect() {
                       <p className="text-base font-inter text-center mb-3 line-clamp-2">
                         {mentor?.bio || "No bio available"}
                       </p>
-
                       <h2 className="text-sm font-raleway text-center">
                         Expertise:{" "}
                         {mentor?.expertise?.join(", ") || "No expertise added"}
@@ -188,6 +203,7 @@ export default function MentorConnect() {
                       </Button>
                     </div>
                   </div>
+                  <Separator orientation="vertical" className="bg-gray-300"/>
 
                   {/* Right Section */}
                   <div className="flex flex-col items-center justify-center w-[35%] px-2 py-4 text-center space-y-2 ">

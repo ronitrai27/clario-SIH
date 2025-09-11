@@ -203,25 +203,23 @@ export default function Navbar() {
                       <AlertDialogCancel className="font-inter cursor-pointer">
                         Cancel
                       </AlertDialogCancel>
-                      <AlertDialogAction asChild>
-                        <Button
-                          disabled={signoutLoading}
-                          className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
-                          onClick={signOut}
-                        >
-                          {signoutLoading ? (
-                            <>
-                              <LuLoader className="animate-spin mr-2 inline" />
-                              <span>Signing Out..</span>
-                            </>
-                          ) : (
-                            <>
-                              <LuLogOut className="mr-2 inline" />
-                              <span>Logout</span>
-                            </>
-                          )}
-                        </Button>
-                      </AlertDialogAction>
+                      <Button
+                        disabled={signoutLoading}
+                        className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
+                        onClick={signOut}
+                      >
+                        {signoutLoading ? (
+                          <>
+                            <LuLoader className="animate-spin mr-2 inline" />
+                            <span>Signing Out..</span>
+                          </>
+                        ) : (
+                          <>
+                            <LuLogOut className="mr-2 inline" />
+                            <span>Logout</span>
+                          </>
+                        )}
+                      </Button>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

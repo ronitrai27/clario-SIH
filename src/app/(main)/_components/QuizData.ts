@@ -1,6 +1,63 @@
 export const quizData = {
   "12": {
     "12th student": {
+      // "choose career paths": {
+      //   focus_specific: [
+      //     {
+      //       question: "Which stream are you in?",
+      //       options: ["Medical", "Science", "Commerce", "Arts"],
+      //     },
+      //     {
+      //       question: "How confident are you in your chosen stream?",
+      //       options: ["Very confident", "Neutral", "Unsure"],
+      //     },
+      //     {
+      //       question: "Why did you choose this stream?",
+      //       options: [
+      //         "Passion",
+      //         "High salary",
+      //         "Social impact",
+      //         "Family influence",
+      //       ],
+      //     },
+      //     {
+      //       question:
+      //         "Along with your stream, what additional skill/interest would you like to build?",
+      //       options: [
+      //         "Technical",
+      //         "Creative",
+      //         "Sports",
+      //         "Entrepreneurship",
+      //         "Others",
+      //       ],
+      //     },
+      //   ],
+      //   deep_understanding: [
+      //       {
+      //       question:
+      //         "Tell us about your interests and hobbies outside academics.",
+      //     },
+      //     {
+      //       question:
+      //         "What is your biggest confusion about choosing a career path?",
+      //       options: [
+      //         "Job options",
+      //         "Future growth",
+      //         "Family pressure",
+      //         "Lack of awareness",
+      //       ],
+      //     },
+      //     {
+      //       question: "What matters most to you in a career?",
+      //       options: [
+      //         "Job security",
+      //         "High income",
+      //         "Work-life balance",
+      //         "Passion",
+      //       ],
+      //     },
+      //   ],
+      // },
       "choose career paths": {
         focus_specific: [
           {
@@ -33,7 +90,7 @@ export const quizData = {
           },
         ],
         deep_understanding: [
-            {
+          {
             question:
               "Tell us about your interests and hobbies outside academics.",
           },
@@ -56,11 +113,31 @@ export const quizData = {
               "Passion",
             ],
           },
+          {
+            question: "Which type of activities excite you the most?",
+            options: [
+              "Problem-solving tasks",
+              "Creative projects",
+              "Helping people",
+              "Leadership roles",
+              "Making a difference",
+            ],
+          },
+          {
+            question: "What motivates you the most to work hard?",
+            options: [
+              "Personal growth",
+              "Earning money",
+              "Recognition/Respect",
+              "Making a difference in society",
+            ],
+          },
         ],
       },
+
       "skill building": {
         focus_specific: [
-           {
+          {
             question: "Which stream are you in?",
             options: ["Medical", "Science", "Commerce", "Arts"],
           },
@@ -113,7 +190,7 @@ export const quizData = {
   },
   "10": {
     "10th student": {
-      "career/ path guidance": { 
+      "career/ path guidance": {
         focus_specific: [
           {
             question: "In Which Stream are you most interested in?",

@@ -130,7 +130,7 @@ export default function HomePage() {
   };
 
   return (
-    <section className="h-full  bg-gray-50 py-6 pl-0 pr-4 w-full overflow-hidden">
+    <section className="h-full  bg-gray-50 py-6 pl-0 pr-4 overflow-hidden w-full">
       {/* <div className="flex flex-col h-full"> */}
       <div className="flex h-full justify-between overflow-hidden ">
         {/*---------- Left side--------------- */}
@@ -175,7 +175,7 @@ export default function HomePage() {
                   {mentors.map((m) => (
                     <Card
                       key={m.id}
-                      className="relative group max-w-[300px] max-h-[285px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
+                      className="relative group w-[300px] max-h-[285px] flex-shrink-0 rounded-2xl shadow-md bg-white p-0 overflow-hidden hover:-translate-y-0.5 duration-200"
                     >
                       <CardHeader className="flex flex-col  gap-2 p-0">
                         <div className="relative w-full py-2">

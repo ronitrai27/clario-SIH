@@ -46,6 +46,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "duck-duck-scrape": "^2.2.7",
+    "framer-motion": "^12.23.12",
     "jsonrepair": "^3.13.0",
     "lucide-react": "^0.542.0",
     "moment": "^2.30.1",

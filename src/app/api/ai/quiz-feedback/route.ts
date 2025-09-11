@@ -17,7 +17,7 @@ function getSchemaAndPrompt(userStatus: string, mainFocus: string) {
     const schema = z.object({
       insights: z.object({
         stream: z.string().optional(),
-        confidence: z.string().optional(),
+        Interest: z.string().optional(),
         degree: z.array(z.string()).optional(),
         summary: z.string().optional(),
         careerOptions: z.array(z.string()).optional(),
@@ -32,10 +32,10 @@ function getSchemaAndPrompt(userStatus: string, mainFocus: string) {
 
     Your task:
     - stream (detected stream from answers)
-    - confidence (student's confidence level)
+    - Interest (student's all interests he mentioned)
     - degree (list of 2-3 relevant degrees for this student according to their stream and careerOptions both. for example: BCA/MBA, B.TECH/M.TECH etc.)
-    - summary (4-line summary about student profile)
-    - careerOptions (list of 5 future career paths suitable for this student)
+    - summary (4-5-line summary about student profile and his choices he made.)
+    - careerOptions (list of 5 future career paths suitable for this student only basis of his interest , skills and confidence level)
 
     Return ONLY JSON in this format:
     {format_instructions}
