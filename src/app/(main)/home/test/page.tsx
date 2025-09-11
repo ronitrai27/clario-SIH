@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getJson } from "serpapi";
 
-// Define the type for the job data we want
 interface Job {
   title: string;
   company_name: string;

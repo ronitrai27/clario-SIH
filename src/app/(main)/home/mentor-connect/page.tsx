@@ -178,19 +178,19 @@ export default function MentorConnect() {
                       </h2>
                     </div>
 
-                    <div className="flex items-center gap-5 mt-4 justify-center">
-                      <p>
+                    <div className="fmt-4 w-full">
+                      {/* <p>
                         <Star className="inline mr-1 fill-yellow-500 text-yellow-400" />{" "}
                         {mentor?.rating}
-                      </p>
-                      <Button size="sm" variant="outline" className=" ">
+                      </p> */}
+                      <Button size="sm" variant="outline" className="w-full">
                         Connect <LuScreenShare className="ml-2" />
                       </Button>
                     </div>
                   </div>
 
                   {/* Right Section */}
-                  <div className="flex flex-col items-center justify-center w-[35%] px-2 py-4 text-center space-y-2">
+                  <div className="flex flex-col items-center justify-center w-[35%] px-2 py-4 text-center space-y-2 ">
                     <span
                       className={`inline-block -mt-4 mb-6 px-2 py-1 text-xs text-black font-inter rounded-full font-medium ${
                         mentor?.availability
@@ -200,13 +200,20 @@ export default function MentorConnect() {
                     >
                       {mentor?.availability ? "Available" : "Available"}
                     </span>
-                    <Image
+                    <div className="relative mb-4">
+                      <Image
                       src={getAvatar(mentor)}
                       alt={mentor?.full_name}
                       width={75}
                       height={75}
                       className="rounded-full border border-gray-200"
                     />
+                     <p className=" absolute -bottom-2 right-1 bg-white border-2 border-yellow-500 rounded-full px-2 flex items-center text-sm">
+                        <Star className="inline mr-1 fill-yellow-500 text-yellow-400"  size={15}/>{" "}
+                        {mentor?.rating}
+                      </p>
+                    </div>
+                    
                     <h2 className="text-lg font-semibold text-gray-900 capitalize">
                       {mentor?.full_name}
                     </h2>
