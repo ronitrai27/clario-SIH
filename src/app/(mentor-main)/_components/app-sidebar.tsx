@@ -68,7 +68,7 @@ import { useAssistantSheetStore } from "@/lib/store/useAssistantSheet"
 import { LuChartNoAxesColumn } from "react-icons/lu";
 
 export function AppSidebar() {
-  const { user, loading } = useUserData();
+  const { mentor, loading } = useUserData();
   const supabase = createClient();
   const router = useRouter();
   const [signoutLoading, setSignoutLoading] = useState(false);
@@ -120,7 +120,7 @@ export function AppSidebar() {
             <PopoverTrigger asChild>
               <div className="bg-gray-50 py-2 px-2 flex items-center justify-between w-full rounded-md overflow-hidden cursor-pointer">
                 <Image
-                  src={user?.avatar || "/user.png"}
+                  src={mentor?.avatar || "/user.png"}
                   alt="logo"
                   width={46}
                   height={46}
@@ -128,10 +128,10 @@ export function AppSidebar() {
                 />
                 <div className="flex flex-col">
                   <p className="text-base font-inter tracking-tight text-black">
-                    {user?.userName}
+                    {mentor?.full_name}
                   </p>
                   <p className="text-gray-800 max-w-[130px] truncate text-sm font-inter">
-                    {user?.userEmail}
+                    {mentor?.email}
                   </p>
                 </div>
                 <LuChevronsDownUp className="text-2xl cursor-pointer text-black" />
@@ -143,7 +143,7 @@ export function AppSidebar() {
               <div className="flex items-center gap-4 bg-blue-100/90 p-2 font-inter overflow-hidden">
                 <Image
                   src={
-                    user?.avatar || `/user${Math.ceil(Math.random() * 5)}.png`
+                    mentor?.avatar || "/user.png"
                   }
                   alt="User Avatar"
                   width={48}
@@ -151,9 +151,9 @@ export function AppSidebar() {
                   className="rounded-full"
                 />
                 <div className="flex flex-col">
-                  <p className="text-sm font-medium">{user?.userName}</p>
+                  <p className="text-sm font-medium">{mentor?.full_name}</p>
                   <p className="text-xs text-muted-foreground truncate max-w-[180px]">
-                    {user?.userEmail}
+                    {mentor?.email}
                   </p>
                 </div>
               </div>

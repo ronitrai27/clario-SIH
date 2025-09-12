@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useUserData } from "@/context/UserDataProvider";
 import Link from "next/link";
+import VideoUpload from "../_components/VideoUpload";
+import VideoPlayer from "../_components/VideoPLayer";
 const Dashbaord = () => {
   const supabase = createClient();
   const router = useRouter();
@@ -32,6 +34,13 @@ const Dashbaord = () => {
         <p>{mentor?.full_name}</p>
         <p>{mentor?.email}</p>
         <Link href="/test-mentor">test</Link>
+      </div>
+      <div>
+        <VideoUpload />
+      </div>
+      <div>
+        <h1>watch video</h1>
+        <VideoPlayer/>
       </div>
     </div>
   );

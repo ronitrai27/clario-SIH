@@ -119,7 +119,7 @@ export default function InsightsReveal({ insights }: { insights: any }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="mt-6 p-4 bg-green-50 border border-green-200 rounded-md flex items-start gap-3"
+          className="mt-6 p-4 bg-green-50 border border-green-500 rounded-md flex items-start gap-3"
         >
           <LuCheck className=" text-green-600" size={35}/>
           <p className="text-sm font-inter text-gray-800">
