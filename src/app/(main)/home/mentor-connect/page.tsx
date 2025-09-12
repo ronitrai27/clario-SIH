@@ -14,19 +14,20 @@ import {
 } from "react-icons/lu";
 import SingleCard from "../../_components/Mentor-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getAllMentorsPaginated } from "@/lib/functions/dbActions";
+import {
+  getAllMentorsPaginated,
+  getRandomMentorVideos,
+} from "@/lib/functions/dbActions";
 import { DBMentor } from "@/lib/types/allTypes";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import {
-  Grid2X2,
-  List,
-  Star,
-} from "lucide-react";
+import { Grid2X2, List, Star } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Video } from "@imagekit/next";
+import { useUserData } from "@/context/UserDataProvider";
 
 const fallbackAvatars = [
   "/a1.png",
@@ -36,8 +37,13 @@ const fallbackAvatars = [
   "/a5.png",
   "/a6.png",
 ];
+interface MentorVideo {
+  id: string;
+  video_url: string;
+}
 
 export default function MentorConnect() {
+  const {user} = useUserData();
   const [mentorData, setMentorData] = useState<DBMentor[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -45,12 +51,26 @@ export default function MentorConnect() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [totalMentors, setTotalMentors] = useState(0);
 
+  const [videos, setVideos] = useState<MentorVideo[]>([]);
+  const [loadingVideo, setLoadingVideo] = useState(true);
+
+  useEffect(() => {
+    if(!user) return
+    const fetchVideos = async () => {
+      const res = await getRandomMentorVideos();
+      setVideos(res);
+      setLoadingVideo(false);
+    };
+    fetchVideos();
+  }, [user]);
+
   const loadMentors = async (pageNum: number) => {
     setLoadingMentors(true);
-    const { mentors: newMentors, hasMore, total:total } = await getAllMentorsPaginated(
-      pageNum,
-      6
-    );
+    const {
+      mentors: newMentors,
+      hasMore,
+      total: total,
+    } = await getAllMentorsPaginated(pageNum, 6);
 
     setMentorData((prev) => {
       if (pageNum === 1) {
@@ -73,12 +93,7 @@ export default function MentorConnect() {
     "border-yellow-500",
     "border-pink-500",
   ];
-    const bgColors = [
-    "bg-white",
-    "bg-white",
-    "bg-white",
-    "bg-white",
-  ];
+  const bgColors = ["bg-white", "bg-white", "bg-white", "bg-white"];
 
   function getRandomBorderColor(id: string) {
     const index = id
@@ -113,16 +128,53 @@ export default function MentorConnect() {
         </h2>
 
         {/* Scrollable Skeleton Row */}
-        <div className="w-full max-w-[1150px] mx-auto px-6">
-          <div className="flex space-x-6 overflow-x-auto px-2 scrollbar-hide max-w-full">
-            {[...Array(5)].map((_, i) => (
-              <Skeleton
-                key={i}
-                className="h-[280px] w-[280px] rounded-lg shrink-0"
-              />
-            ))}
+        {loadingVideo ? (
+          <div className="w-full max-w-[1150px] mx-auto px-6">
+            <div className="flex space-x-6 overflow-x-auto px-2 scrollbar-hide max-w-full">
+              {[...Array(5)].map((_, i) => (
+                <Skeleton
+                  key={i}
+                  className="h-[280px] w-[280px] rounded-lg shrink-0"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full max-w-[1150px] mx-auto px-6">
+            <div className="flex space-x-6 overflow-x-auto px-2 scrollbar-hide max-w-full">
+              {videos.map((video) => {
+                const videoPath = video.video_url.split("/").slice(4).join("/");
+                return (
+                  <div
+                    key={video.id}
+                    className="h-[280px] w-[280px] rounded-lg shrink-0 relative overflow-hidden hover:scale-105 duration-200 cursor-pointer"
+                  >
+                    <Video
+                      urlEndpoint={
+                        process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT!
+                      }
+                      src={videoPath}
+                      autoPlay
+                      muted
+                      controls
+                      loop
+                      loading="lazy"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "12px",
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="max-w-[900px] w-full mx-auto flex items-center justify-between  px-4 py-2 my-6">
           {/* Search Bar */}
@@ -203,7 +255,7 @@ export default function MentorConnect() {
                       </Button>
                     </div>
                   </div>
-                  <Separator orientation="vertical" className="bg-gray-300"/>
+                  <Separator orientation="vertical" className="bg-gray-300" />
 
                   {/* Right Section */}
                   <div className="flex flex-col items-center justify-center w-[35%] px-2 py-4 text-center space-y-2 ">
@@ -218,18 +270,21 @@ export default function MentorConnect() {
                     </span>
                     <div className="relative mb-4">
                       <Image
-                      src={getAvatar(mentor)}
-                      alt={mentor?.full_name}
-                      width={75}
-                      height={75}
-                      className="rounded-full border border-gray-200"
-                    />
-                     <p className=" absolute -bottom-2 right-1 bg-white border-2 border-yellow-500 rounded-full px-2 flex items-center text-sm">
-                        <Star className="inline mr-1 fill-yellow-500 text-yellow-400"  size={15}/>{" "}
+                        src={getAvatar(mentor)}
+                        alt={mentor?.full_name}
+                        width={75}
+                        height={75}
+                        className="rounded-full border border-gray-200"
+                      />
+                      <p className=" absolute -bottom-2 right-1 bg-white border-2 border-yellow-500 rounded-full px-2 flex items-center text-sm">
+                        <Star
+                          className="inline mr-1 fill-yellow-500 text-yellow-400"
+                          size={15}
+                        />{" "}
                         {mentor?.rating}
                       </p>
                     </div>
-                    
+
                     <h2 className="text-lg font-semibold text-gray-900 capitalize">
                       {mentor?.full_name}
                     </h2>
@@ -262,7 +317,7 @@ export default function MentorConnect() {
         {hasMore && (
           <div className="flex justify-center mt-14">
             <Button
-            variant="outline"
+              variant="outline"
               onClick={() =>
                 loadMentors(page + 1).then(() => setPage(page + 1))
               }
@@ -273,10 +328,10 @@ export default function MentorConnect() {
                   <LuLoader className="animate-spin inline mr-4 text-2xl" />
                   <span>Loading...</span>
                 </>
-              ): (
+              ) : (
                 <>
-                <LuPlus className="inline mr-4 text-2xl" />
-                <span>Load More</span>
+                  <LuPlus className="inline mr-4 text-2xl" />
+                  <span>Load More</span>
                 </>
               )}
             </Button>

@@ -12,6 +12,10 @@ interface PaginatedMentors {
   hasMore: boolean;
   total: number;
 }
+export interface MentorVideo {
+  id: string;
+  video_url: string;
+}
 
 const expertiseGroups: Record<string, string[]> = {
   "career/ path guidance": [
@@ -92,23 +96,25 @@ export async function getAllMentorsPaginated(
       let parsed: PaginatedMentors;
 
       // Check if cachedData is already an object (e.g., Redis client auto-parsed)
-      if (typeof cachedData === 'object' && cachedData !== null) {
+      if (typeof cachedData === "object" && cachedData !== null) {
         parsed = cachedData as PaginatedMentors;
-      } else if (typeof cachedData === 'string') {
+      } else if (typeof cachedData === "string") {
         // Parse if it's a string
         parsed = JSON.parse(cachedData) as PaginatedMentors;
       } else {
-        throw new Error('Cached data is neither an object nor a valid JSON string');
+        throw new Error(
+          "Cached data is neither an object nor a valid JSON string"
+        );
       }
 
       // Validate the parsed data structure
       if (
         parsed &&
         Array.isArray(parsed.mentors) &&
-        typeof parsed.hasMore === 'boolean' &&
-        typeof parsed.total === 'number'
+        typeof parsed.hasMore === "boolean" &&
+        typeof parsed.total === "number"
       ) {
-        console.log(`--- HIT from Redis for mentors-connect ${cacheKey} ---`);
+        console.log(`--- ✅HIT from Redis for mentors-connect ${cacheKey} ---`);
         return parsed;
       }
       console.warn(`Invalid cache data structure for key: ${cacheKey}`);
@@ -214,4 +220,59 @@ export async function clearMentorCache(focus: string) {
   } catch (error) {
     console.error(`❌ Failed to clear Redis cache for key: ${cacheKey}`, error);
   }
+}
+
+
+export async function getRandomMentorVideos(): Promise<MentorVideo[]> {
+  const supabase = createClient();
+  const cacheKey = `mentorVideos`;
+
+  const cachedVideos = await redis.get(cacheKey);
+
+  if (cachedVideos) {
+    console.log(`----✅ Mentor Videos HIT from Redis for key: ${cacheKey}`);
+    try {
+      let parsed: MentorVideo[];
+
+      if (typeof cachedVideos === "object" && cachedVideos !== null) {
+        parsed = cachedVideos as MentorVideo[];
+      } else if (typeof cachedVideos === "string") {
+        parsed = JSON.parse(cachedVideos) as MentorVideo[];
+      } else {
+        throw new Error("Cached data is neither an object nor a string");
+      }
+
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+    } catch (err) {
+      console.warn(`❌ Invalid cache data for key: ${cacheKey}`, err);
+    }
+  } else {
+    console.log(`--- Cache miss for mentor videos: ${cacheKey} ---`);
+  }
+
+  const { data, error } = await supabase
+    .from("mentors")
+    .select("id, video_url")
+    .not("video_url", "is", null);
+
+  if (error) {
+    console.error("Error fetching mentor videos:", error);
+    return [];
+  }
+
+  if (!data || data.length === 0) {
+    console.warn("⚠️ No mentor videos found in DB");
+    return [];
+  }
+
+  // pick 6 random videos
+  const shuffled = data.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 6);
+
+  await redis.set(cacheKey, JSON.stringify(selected), { ex: 300 });
+  console.log("📦 Mentor videos fetched from DB and cached in Redis");
+
+  return selected;
 }

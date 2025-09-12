@@ -79,7 +79,7 @@ export function AppSidebar() {
     try {
       await supabase.auth.signOut();
       toast.success("Signed out successfully");
-      router.push("/auth");
+      router.push("/auth-mentor");
     } catch (error) {
       console.error("Error signing out:", error);
     } finally {
@@ -238,7 +238,7 @@ export function AppSidebar() {
                       <AlertDialogCancel className="font-inter cursor-pointer">
                         Cancel
                       </AlertDialogCancel>
-                      <AlertDialogAction
+                      <Button
                         className="bg-blue-500 text-white hover:bg-blue-700 font-inter cursor-pointer"
                         onClick={signOut}
                       >
@@ -253,7 +253,7 @@ export function AppSidebar() {
                             <span>Logout</span>
                           </>
                         )}
-                      </AlertDialogAction>
+                      </Button>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

@@ -13,6 +13,7 @@ export type DBMentor = {
   avatar: string | null;
   created_at: string;
   is_verified: boolean;
+  video_url: string | null;
 };
 
 export type DBUser =  {

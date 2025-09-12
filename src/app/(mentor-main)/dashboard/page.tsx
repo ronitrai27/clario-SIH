@@ -33,7 +33,7 @@ const Dashbaord = () => {
         {loading && "Loading..."}
         <p>{mentor?.full_name}</p>
         <p>{mentor?.email}</p>
-        <Link href="/test-mentor">test</Link>
+        {/* <Link href="/test-mentor">test</Link> */}
       </div>
       <div>
         <VideoUpload />
