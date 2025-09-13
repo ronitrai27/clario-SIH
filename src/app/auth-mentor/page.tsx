@@ -205,7 +205,7 @@ export default function AuthPage() {
             </div>
 
             {error && (
-              <p className="font-raleway text-sm text-muted-foreground text-center mt-10">
+              <p className="font-sora text-sm text-gray-600 text-center mt-10">
                 <LuInfo className="mr-2 inline" /> {error}
               </p>
             )}

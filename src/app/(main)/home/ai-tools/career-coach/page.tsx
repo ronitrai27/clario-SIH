@@ -87,7 +87,7 @@ const CareerCoach = () => {
                 : careerSkillOptions.map((option, idx) => (
                     <div
                       key={idx}
-                      className="rounded-xl shadow p-2 bg-gradient-to-br from-white to-blue-50 border hover:shadow-md hover:from-blue-50 hover:to-blue-100 transition justify-items-center"
+                      className="rounded-xl shadow p-2 bg-gradient-to-br from-white to-blue-50 border hover:shadow-md hover:from-blue-50 hover:to-blue-100 transition justify-items-center text-center"
                     >
                       <p className="text-sm font-inter font-medium text-black tracking-tight">
                         {option}
